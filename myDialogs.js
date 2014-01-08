@@ -6,37 +6,43 @@ function myDialogs() {
             cdDiv, // div for confirm dialog to hold the HTML below
             confirmDialog = '<div  id="hgsmodc_veil" >' +
             '<span  id="hgsmodc_bbb">you should never see this</span><hr>' +
-            '<div style="text-align:center">' +
+            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
             '<button id="modal_confirm_yes" >Yes</button>' +
             '<button id="modal_confirm_no" >No</button>' +
-            '</div>' +
+            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>' +
             '</div>',
             alDiv, //div for alert box to hold HTML below
             alertDialog = '<div  id="hgsmoda_veil">' +
             '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>' +
             '<hr style="clear:both">' +
             '<span  id="hgsmoda_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><button>OK</button> </div>',
+            '<div style="text-align:center" ><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
+            '<button  id="hgsmoda_bbb_ok" >OK</button>' +
+            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em;"></div>' +
+            '',
             prDiv, //div for prompt by eenter box to hold HTML below
             promptDialog = '<div  id="hgsmodp_veil" style="text-align:center">' +
             '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
             '<hr style="clear:both">' +
             '<span  id="hgsmodp_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><input id=hgsmodp_ccc type=text size=40 maxlength=40></div>' +
-            '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button> </div>',
+            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"><input id=hgsmodp_ccc type=text size=40 maxlength=40></div>' +
+            '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button>'+
+            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"> </div>',
             slDiv, //div for prompt by select box to hold HTML below
             selectDialog = '<div  id="hgsmods_veil">' +
             '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
             '<hr style="clear:both">' +
             '<span  id="hgsmods_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><select id=hgsmods_ccc  size=1></select></div><hr>' +
-            '<div style="text-align:center"><br><button id=hgsmods_ddd  disabled>OK</button> </div>';
+            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"><select id=hgsmods_ccc  size=1></select></div><hr>' +
+            '<div style="text-align:center"><br><button id=hgsmods_ddd >OK</button><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>';
+
 
     function gebi(id) {
         return document.getElementById(id);
     }
+
     function createDialogBox(id, HTML) {
-        var aDiv;
+        var aDiv, dd;
         aDiv = document.createElement('DIV');
         aDiv.id = id;
         aDiv.style.display = 'none';
@@ -44,7 +50,21 @@ function myDialogs() {
         aDiv.style.zindex = 10;
         aDiv.innerHTML = HTML;
         document.body.appendChild(aDiv);
+        dd = aDiv.querySelectorAll('.DuMmY_HGS');
+        if (dd.length === 2) {
+            dd[0].onfocus = function() {
+                dd[0].nextSibling.focus();
+            };
+            dd[1].onfocus = function() {
+                dd[1].previousSibling.focus();
+            };
+            dd[0].style.position = 'absolute';
+            dd[0].style.top = '-2000px';
+            dd[1].style.position = 'absolute';
+            dd[1].style.top = '-2000px';
+        }
         return aDiv;
+
     }
     function positionDialog(id) {
         var aDiv, x, y, cw, ch;
@@ -61,6 +81,8 @@ function myDialogs() {
     }
     /*
      * this will cover the entire screen
+     * Probably already created by myBackend.js
+     * 
      */
     veil = document.getElementById('veilFromBackend');
     if (veil === null) {
@@ -88,6 +110,13 @@ function myDialogs() {
                 ' position:fixed;top:200px;left:400px;border-radius: 5px;padding:8px; }';
         document.getElementsByTagName('head')[0].appendChild(divClass);
         /*
+         * create a dummy class for locating elements 
+         */
+        divClass = document.createElement('style');
+        divClass.type = 'text/css';
+        divClass.innerHTML = '.DuMmY_HGS{/*keep emtpy*/}';
+        document.getElementsByTagName('head')[0].appendChild(divClass);
+        /*
          * create  dialog boxes
          */
         cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog);
@@ -109,6 +138,7 @@ function myDialogs() {
                 veil.style.zindex = -1;
                 veil.style.visibility = 'hidden';
             };
+            gebi('hgsmoda_bbb_ok').focus();
         } else {
             alert(a_text); // fall back
         }
@@ -137,6 +167,7 @@ function myDialogs() {
                 veil.style.visibility = 'hidden';
                 callNo();
             };
+            gebi('modal_confirm_no').focus();
         } else {
             ret = confirm(a_text);  // fall back
             if (ret) {
@@ -164,6 +195,7 @@ function myDialogs() {
                 veil.style.visibility = 'hidden';
                 callOnEnter(gebi('hgsmodp_ccc').value);
             };
+            gebi('hgsmodp_ccc').focus();
         }
         return;
     }
@@ -207,18 +239,16 @@ function myDialogs() {
                 op.title = d;
                 sel.options.add(op);
             }
-            sel.selectedIndex = -1;
-            sel.onchange = function() {
-                gebi('hgsmods_ddd').disabled = false;
-            };
+            sel.selectedIndex = 0;
+            
             gebi('hgsmods_ddd').onclick = function() {
                 slDiv.style.display = 'none';
                 veil.style.zindex = -1;
-                veil.style.visibility = 'hidden';
-                gebi('hgsmods_ddd').disabled = true;
+                veil.style.visibility = 'hidden';               
                 that = gebi('hgsmods_ccc');
                 callOnSelect(that.options[that.selectedIndex]);
             };
+            gebi('hgsmods_ccc').focus();
         }
         return;
     }
@@ -228,7 +258,7 @@ function myDialogs() {
     return {
         myAlert: myAlert, //(text)
         myConfirm: myConfirm, //(text,callYes,callNo)
-        myPrompt: myPrompt, //(text,callYes,callNo)
-        myPromptSelect: myPromptSelect //(text,callYes,callNo)
+        myPrompt: myPrompt, //(text,default Value,callOnEnter)
+        myPromptSelect: myPromptSelect //(text,option-list,callOnSelect)
     };
 }
