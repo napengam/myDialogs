@@ -25,22 +25,30 @@ function myDialogs() {
             '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
             '<hr style="clear:both">' +
             '<span  id="hgsmodp_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"><input id=hgsmodp_ccc type=text size=40 maxlength=40></div>' +
-            '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button>'+
+            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
+            '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>' +
+            '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button>' +
             '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"> </div>',
             slDiv, //div for prompt by select box to hold HTML below
             selectDialog = '<div  id="hgsmods_veil">' +
             '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
             '<hr style="clear:both">' +
             '<span  id="hgsmods_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"><select id=hgsmods_ccc  size=1></select></div><hr>' +
-            '<div style="text-align:center"><br><button id=hgsmods_ddd >OK</button><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>';
+            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
+            '<select id=hgsmods_ccc  size=1></select></div><hr>' +
+            '<div style="text-align:center"><br><button id=hgsmods_ddd >OK</button>' +
+            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>';
 
 
     function gebi(id) {
         return document.getElementById(id);
     }
 
+    function vailOnClick(id) {
+        veil.onclick = function() {
+            gebi(id).focus();
+        };
+    }
     function createDialogBox(id, HTML) {
         var aDiv, dd;
         aDiv = document.createElement('DIV');
@@ -63,6 +71,10 @@ function myDialogs() {
             dd[1].style.position = 'absolute';
             dd[1].style.top = '-2000px';
         }
+        aDiv.onclick = function() {
+            dd[0].focus();
+        }
+        
         return aDiv;
 
     }
@@ -139,6 +151,7 @@ function myDialogs() {
                 veil.style.visibility = 'hidden';
             };
             gebi('hgsmoda_bbb_ok').focus();
+            vailOnClick('hgsmoda_bbb_ok');
         } else {
             alert(a_text); // fall back
         }
@@ -168,6 +181,7 @@ function myDialogs() {
                 callNo();
             };
             gebi('modal_confirm_no').focus();
+            vailOnClick('modal_confirm_no');
         } else {
             ret = confirm(a_text);  // fall back
             if (ret) {
@@ -196,6 +210,7 @@ function myDialogs() {
                 callOnEnter(gebi('hgsmodp_ccc').value);
             };
             gebi('hgsmodp_ccc').focus();
+            vailOnClick('hgsmodp_ccc');
         }
         return;
     }
@@ -240,15 +255,16 @@ function myDialogs() {
                 sel.options.add(op);
             }
             sel.selectedIndex = 0;
-            
+
             gebi('hgsmods_ddd').onclick = function() {
                 slDiv.style.display = 'none';
                 veil.style.zindex = -1;
-                veil.style.visibility = 'hidden';               
+                veil.style.visibility = 'hidden';
                 that = gebi('hgsmods_ccc');
                 callOnSelect(that.options[that.selectedIndex]);
             };
             gebi('hgsmods_ccc').focus();
+            vailOnClick('hgsmods_ccc');
         }
         return;
     }
