@@ -73,7 +73,7 @@ function myDialogs() {
         }
         aDiv.onclick = function() {
             dd[0].focus();
-        }
+        };
         
         return aDiv;
 
