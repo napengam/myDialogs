@@ -1,43 +1,44 @@
 function myDialogs() {
-
+    'use strict';
     var
             veil,
             divClass, // will hold a css class
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = '<div  id="hgsmodc_veil" >' +
-            '<span  id="hgsmodc_bbb">you should never see this</span><hr>' +
-            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
-            '<button id="modal_confirm_yes" >Yes</button>' +
-            '<button id="modal_confirm_no" >No</button>' +
-            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>' +
-            '</div>',
+            confirmDialog = ['<div  id="hgsmodc_veil" >',
+                '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
+                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<button id="modal_confirm_yes" >Yes</button>',
+                '<button id="modal_confirm_no" >No</button>',
+                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>',
+                '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = '<div  id="hgsmoda_veil">' +
-            '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>' +
-            '<hr style="clear:both">' +
-            '<span  id="hgsmoda_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center" ><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
-            '<button  id="hgsmoda_bbb_ok" >OK</button>' +
-            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em;"></div>' +
-            '',
+            alertDialog = ['<div  id="hgsmoda_veil">',
+                '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
+                '<div style="text-align:center" ><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<button  id="hgsmoda_bbb_ok" >OK</button>',
+                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em;"></div>',
+                ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = '<div  id="hgsmodp_veil" style="text-align:center">' +
-            '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
-            '<hr style="clear:both">' +
-            '<span  id="hgsmodp_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
-            '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>' +
-            '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button>' +
-            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"> </div>',
+            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center">',
+                '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
+                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
+                '<div id=hgsmodp_ddd  style="text-align:center"><button>OK</button>',
+                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"> </div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = '<div  id="hgsmods_veil">' +
-            '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>' +
-            '<hr style="clear:both">' +
-            '<span  id="hgsmods_bbb"> you should never see this </span><hr>' +
-            '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">' +
-            '<select id=hgsmods_ccc  size=1></select></div><hr>' +
-            '<div style="text-align:center"><br><button id=hgsmods_ddd >OK</button>' +
-            '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>';
+            selectDialog = ['<div  id="hgsmods_veil">',
+                '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
+                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<select id=hgsmods_ccc  size=1></select></div><hr>',
+                '<div style="text-align:center"><br><button id=hgsmods_ddd >OK</button>',
+                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '</div>'].join('');
 
 
     function gebi(id) {
@@ -74,7 +75,7 @@ function myDialogs() {
         aDiv.onclick = function() {
             dd[0].focus();
         };
-        
+
         return aDiv;
 
     }
@@ -109,7 +110,7 @@ function myDialogs() {
         veil.style.left = '0px';
         veil.style.opacity = 0.2;
         veil.style.background = '';
-        veil.innerHTML = '<hr style="margin:0;padding:0;width:1px;height:2000px">';
+        veil.innerHTML = '<hr style="visibility:hidden;margin:0;padding:0;width:1px;height:2000px">';
         document.body.appendChild(veil);
     }
     if (gebi('hgsmodc_aaa') === null && gebi('hgsmoda_aaa') === null && gebi('hgsmodp_aaa') === null && gebi('hgsmods_aaa') === null) {
