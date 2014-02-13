@@ -136,6 +136,11 @@ function myDialogs() {
         alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
         prDiv = createDialogBox('hgsmodp_aaa', promptDialog);
         slDiv = createDialogBox('hgsmods_aaa', selectDialog);
+    } else {
+        cdDiv = gebi('hgsmodc_aaa');
+        alDiv = gebi('hgsmoda_aaa');
+        prDiv = gebi('hgsmodp_aaa');
+        slDiv = gebi('hgsmods_aaa');
     }
     /*
      * The action within the alert box is just an OK button
