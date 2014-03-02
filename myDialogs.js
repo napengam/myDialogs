@@ -58,6 +58,7 @@ function myDialogs() {
         aDiv.className = 'divClass';
         aDiv.style.zindex = 10;
         aDiv.innerHTML = HTML;
+
         document.body.appendChild(aDiv);
         dd = aDiv.querySelectorAll('.DuMmY_HGS');
         if (dd.length === 2) {
@@ -67,15 +68,29 @@ function myDialogs() {
             dd[1].onfocus = function() {
                 dd[1].previousSibling.focus();
             };
-            dd[0].style.position = 'absolute';
-            dd[0].style.top = '-2000px';
-            dd[1].style.position = 'absolute';
-            dd[1].style.top = '-2000px';
+            dd[0].style.visibility = 'hidden';
+            dd[1].style.visibility = 'hidden';
         }
         aDiv.onclick = function() {
             dd[0].focus();
         };
-
+        aDiv.draggable = true;
+        aDiv.ondrag = function(e) {
+            return;
+            this.style.top = parseInt(this.style.top, 10) + (e.clientY - this.hgsTop) + 'px';
+            this.style.left = parseInt(this.style.left, 10) + (e.clientX - this.hgsLeft) + 'px';
+            this.hgsTop = e.clientY;
+            this.hgsLeft = e.clientX;
+        };
+        aDiv.ondragstart = function(e) {
+            this.hgsTop = e.clientY;
+            this.hgsLeft = e.clientX;
+            e.dataTransfer.setData('text/plain', 'gggggggggg');
+        };
+        aDiv.ondragend = function(e) {
+            this.style.top = parseInt(this.style.top, 10) + (e.clientY - this.hgsTop) + 'px';
+            this.style.left = parseInt(this.style.left, 10) + (e.clientX - this.hgsLeft) + 'px';
+        };
         return aDiv;
 
     }
@@ -91,6 +106,8 @@ function myDialogs() {
         ch = aDiv.clientHeight;
         aDiv.style.top = (y - ch) / 2 + 'px';
         aDiv.style.left = (x - cw) / 2 + 'px';
+
+
     }
     /*
      * this will cover the entire screen
