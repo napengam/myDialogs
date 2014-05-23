@@ -76,20 +76,22 @@ function myDialogs() {
         };
         aDiv.draggable = true;
         aDiv.ondrag = function(e) {
-            return;
-            this.style.top = parseInt(this.style.top, 10) + (e.clientY - this.hgsTop) + 'px';
-            this.style.left = parseInt(this.style.left, 10) + (e.clientX - this.hgsLeft) + 'px';
+            //return;
+            //this.style.top = parseInt(this.style.top, 10) + (e.clientY - this.hgsTop) + 'px';
+            //this.style.left = parseInt(this.style.left, 10) + (e.clientX - this.hgsLeft) + 'px';
             this.hgsTop = e.clientY;
             this.hgsLeft = e.clientX;
         };
-        aDiv.ondragstart = function(e) {
+        aDiv.ondragstart = function(e) { 
+            this.style.position='absolute';
             this.hgsTop = e.clientY;
             this.hgsLeft = e.clientX;
             e.dataTransfer.setData('text/plain', 'gggggggggg');
         };
-        aDiv.ondragend = function(e) {
-            this.style.top = parseInt(this.style.top, 10) + (e.clientY - this.hgsTop) + 'px';
-            this.style.left = parseInt(this.style.left, 10) + (e.clientX - this.hgsLeft) + 'px';
+        aDiv.ondragend = function(e) { 
+            this.style.position='absolute';
+            this.style.top = /* parseInt(this.style.top, 10) + */(e.clientY ) + 'px';
+            this.style.left = /*parseInt(this.style.left, 10) + */(e.clientX) + 'px';
         };
         return aDiv;
 
