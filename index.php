@@ -33,7 +33,7 @@ The latest version can allways be found at http://hgsweb.de
         <meta charset="UTF-8">
         <link href="main.css" type="text/css" rel="stylesheet" >    
         <script src="moveToBottom.js"></script>
-        <script src="myDialogs.js"></script>
+        <script src="myDialog.js"></script>
         <script type="text/javascript">
             function addEvent(obj, ev, fu) {
                 if (obj.addEventListener) {
