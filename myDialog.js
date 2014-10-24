@@ -63,14 +63,7 @@ function myDialogs() {
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
         aDiv.draggable = true;
-        aDiv.ondrag = function (e) {
-            this.style.top = e.clientY + 'px';
-            this.style.left = e.clientX + 'px';
-        };
-        aDiv.ondragend = function (e) {
-            this.style.top = e.clientY + 'px';
-            this.style.left = e.clientX + 'px';
-        };
+       
         document.body.appendChild(aDiv);
         dd = aDiv.querySelectorAll('.DuMmY_HGS');
         if (dd.length === 2) {
@@ -92,24 +85,9 @@ function myDialogs() {
         return aDiv;
 
     }
-    function absPos(obj) {// return absolute x,y position of obj
-        var ob, pos = {};
-        pos.x = obj.offsetLeft;
-        pos.y = obj.offsetTop;
-        if (typeof pos.x === 'undefined') {
-            return {x: 0, y: 0};
-        }
-        ob = obj.offsetParent;
-        while (ob !== null && ob.tagName !== 'BODY') {
-            pos.x += ob.offsetLeft;
-            pos.y += ob.offsetTop;
-            ob = ob.offsetParent;
-        }
-        return pos;
-    }
 
     function positionDialog(id) {
-        var aDiv, x, xx, yy, y, cw, ch, ev = window.event, pos;
+        var aDiv, x, y, cw, ch;
         veil.style.visibility = 'visible';
         veil.style.zIndex = 5;
         aDiv = gebi(id);
@@ -126,12 +104,13 @@ function myDialogs() {
         aDiv.style.top = (y - ch) / 2 + 'px';
         aDiv.style.left = (x - cw) / 2 + 'px';
 
-        /*
-         * this will cover the entire screen
-         * Probably already created by myBackend.js
-         * 
-         */
+
     }
+    /*
+     * this will cover the entire screen
+     * Probably already created by myBackend.js
+     * 
+     */
     veil = document.getElementById('veilFromBackend');
     if (veil === null) {
         veil = document.createElement('DIV');
@@ -327,7 +306,7 @@ function myDialogs() {
         if ([9, 13, 32, 27].indexOf(keyCode) === -1) {
             // Don't do work on keys we don't care about.
             return;
-        }    
+        }
         if (keyCode === 9) {
             if (typeof e.stopPropagation === 'function') {
                 e.stopPropagation();
