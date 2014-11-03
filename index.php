@@ -78,6 +78,7 @@ The latest version can allways be found at http://hgsweb.de
             </div>
             <p class="title">Alert , Confirmation , Prompt Dialog
                 <span class="small">All source code is included in this page</span>  </p>
+            <p>Use ctrl+leftMouseButton to drag dialog boxes.
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
                 <button  onclick='myAlert("<h1>The Alert box</h1><br>You made it !")'>Show Alert Box</button>
