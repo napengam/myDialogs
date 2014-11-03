@@ -81,7 +81,7 @@ The latest version can allways be found at http://hgsweb.de
             <p>Use ctrl+leftMouseButton to drag dialog boxes.
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
-                <button  onclick='myAlert("<h1>The Alert box</h1><br>You made it !")'>Show Alert Box</button>
+                <button  onclick='myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
                 <button  onclick='myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
                 <button  onclick='myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
                 <button  onclick="mySelect('<h2>Please select</h2>', 'value1|text1|description 1,value2|text2|description 2', callOnSelect)">Show Select Dialog</button>
