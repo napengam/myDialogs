@@ -57,13 +57,11 @@ function myDialogs() {
         aDiv.id = id;
         aDiv.style.display = 'none';
 
-
         aDiv.className = 'divClass';
         aDiv.style.zIndex = 10;
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
-        aDiv.draggable = true;
-       
+
         document.body.appendChild(aDiv);
         dd = aDiv.querySelectorAll('.DuMmY_HGS');
         if (dd.length === 2) {
@@ -81,7 +79,7 @@ function myDialogs() {
         aDiv.onclick = function () {
             dd[0].focus();
         };
-
+        makeDrag(aDiv);
         return aDiv;
 
     }
@@ -169,7 +167,7 @@ function myDialogs() {
             gebi('hgsmoda_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
             positionDialog('hgsmoda_aaa');
 
-            alDiv.onclick = function () {
+             gebi('hgsmoda_bbb_ok').onclick = function () {
                 alDiv.style.display = 'none';
                 veil.style.zIndex = -1;
                 veil.style.visibility = 'hidden';
