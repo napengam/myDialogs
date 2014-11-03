@@ -161,13 +161,13 @@ function myDialogs() {
      * disapear.
      */
     function myAlert(a_text) {
-
+        a_text = htmlentity(a_text);
         if (veil) {
             gebi('hgsmoda_bbb').innerHTML = '';
-            gebi('hgsmoda_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
+            gebi('hgsmoda_bbb').innerHTML = '<b>'+a_text.replace(/\n/gi, "<br>")+'</b>';
             positionDialog('hgsmoda_aaa');
 
-             gebi('hgsmoda_bbb_ok').onclick = function () {
+            gebi('hgsmoda_bbb_ok').onclick = function () {
                 alDiv.style.display = 'none';
                 veil.style.zIndex = -1;
                 veil.style.visibility = 'hidden';
@@ -189,6 +189,7 @@ function myDialogs() {
      */
     function myConfirm(a_text, callYes, callNo) {
         var ret;
+        //a_text = htmlentity(a_text);
         if (veil) {
             positionDialog('hgsmodc_aaa');
             gebi('hgsmodc_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
@@ -226,6 +227,7 @@ function myDialogs() {
      * 
      * */
     function myPrompt(a_text, defaultValue, callOnEnter) {
+        //a_text = htmlentity(a_text);
         if (veil) {
             positionDialog('hgsmodp_aaa');
             gebi('hgsmodp_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
@@ -250,6 +252,7 @@ function myDialogs() {
      * 
      * */
     function myPromptSelect(a_text, options, callOnSelect) {
+        //a_text = htmlentity(a_text);
         var n, i, sel, o0, o1, v, o, d, op, that;
         if (veil) {
             positionDialog('hgsmods_aaa');
@@ -313,6 +316,14 @@ function myDialogs() {
                 window.event.cancelBubble = true;
             }
         }
+    }
+    function htmlentity(value) {
+        value = value.replace(/&/gi, "&amp;");
+        value = value.replace(/</gi, "&lt;");
+        value = value.replace(/>/gi, "&gt;");
+        value = value.replace(/"/gi, "&quot;");
+        value = value.replace(/'/gi, "&#039;");
+        return value;
     }
     /*
      * Here we  reveal the dialogs/functions to the caller
