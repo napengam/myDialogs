@@ -174,7 +174,7 @@ function myDialogs() {
                 window.onkeydown = keyDown;
             };
             gebi('hgsmoda_bbb_ok').focus();
-            vailOnClick('hgsmoda_bbb_ok');
+            //vailOnClick('hgsmoda_bbb_ok');
             window.onkeydown = handleKeyDown;
         } else {
             alert(a_text); // fall back
@@ -282,8 +282,8 @@ function myDialogs() {
                 }
                 op = document.createElement("option");
                 op.value = v;
-                op.text = o;
-                op.title = d;
+                op.text = (o);
+                op.title = (d);
                 sel.options.add(op);
             }
             sel.selectedIndex = 0;
