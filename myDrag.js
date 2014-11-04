@@ -7,7 +7,7 @@ function makeDrag(obj) {
         obj.style.top = xy.y + 'px';
         obj.style.left = xy.x + 'px';
         obj.style.position = 'absolute';
-        obj.style.border = '1px solid black';// just for demo
+        
     }
     obj.onmousedown = start;
 

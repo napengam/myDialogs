@@ -88,8 +88,6 @@ function myDialogs() {
 
         aDiv.style.top = (y - ch) / 2 + 'px';
         aDiv.style.left = (x - cw) / 2 + 'px';
-
-
     }
     /*
      * this will cover the entire screen
@@ -104,7 +102,7 @@ function myDialogs() {
         veil.style.width = '100%';
         veil.style.zIndex = -1;
         veil.style.background = 'white';
-        veil.style.visibility = 'hidden';
+        veil.style.visibility =  'hidden';
         veil.style.position = 'fixed';
         veil.style.top = '0px';
         veil.style.left = '0px';
@@ -123,6 +121,10 @@ function myDialogs() {
                 'border-radius: 5px;padding:8px; }';
         document.getElementsByTagName('head')[0].appendChild(divClass);
     }
+    /*
+     * Fetch or create the dialogboxes
+     * 
+     */
     alDiv = gebi('hgsmoda_aaa');
     alDiv === null ? alDiv=createDialogBox('hgsmoda_aaa', alertDialog) : '';
     cdDiv = gebi('hgsmodc_aaa');
