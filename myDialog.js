@@ -7,43 +7,42 @@ function myDialogs() {
             cdDiv, // div for confirm dialog to hold the HTML below
             confirmDialog = ['<div  id="hgsmodc_veil" >',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
-                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<div style="text-align:center">',
                 '<button id="modal_confirm_yes" tabindex=1 >Yes</button>',
                 '<button id="modal_confirm_no" tabindex=2 >No</button>',
-                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"></div>',
+                '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
             alertDialog = ['<div  id="hgsmoda_veil">',
                 '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center" ><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<div style="text-align:center" >',
                 '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button>',
-                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em;"></div>',
+                '</div>',
                 ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
             promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center">',
                 '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<div style="text-align:center">',
                 '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
                 '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
-                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em"> </div>'].join(''),
+                '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
             selectDialog = ['<div  id="hgsmods_veil">',
                 '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center"><input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<div style="text-align:center">',
                 '<select id=hgsmods_ccc  size=1></select></div><hr>',
-                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
-                '<input class=DuMmY_HGS type=text size=1 maxlength=1 style="font-size:0.1em">',
+                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',             
                 '</div>'].join('');
 
 
     function gebi(id) {
-        return document.getElementById(id);
+        return document.getElementById(id)
     }
 
     function vailOnClick(id) {
@@ -63,19 +62,7 @@ function myDialogs() {
         aDiv.innerHTML = HTML;
 
         document.body.appendChild(aDiv);
-        dd = aDiv.querySelectorAll('.DuMmY_HGS');
-        if (dd.length === 2) {
-            dd[0].onfocus = function () {
-                dd[0].nextSibling.focus();
-            };
-            dd[1].onfocus = function () {
-                dd[1].previousSibling.focus();
-            };
-            dd[0].style.position = 'absolute';
-            dd[0].style.top = '-2000px';
-            dd[1].style.position = 'absolute';
-            dd[1].style.top = '-2000px';
-        }
+        
         aDiv.onclick = function () {
             dd[0].focus();
         };
@@ -134,13 +121,6 @@ function myDialogs() {
         divClass.type = 'text/css';
         divClass.innerHTML = '.divClass{width:auto;background:#dddbd1; border: 1px solid rgb(88, 121, 224);z-index:2000;' +
                 'border-radius: 5px;padding:8px; }';
-        document.getElementsByTagName('head')[0].appendChild(divClass);
-        /*
-         * create a dummy class for locating elements 
-         */
-        divClass = document.createElement('style');
-        divClass.type = 'text/css';
-        divClass.innerHTML = '.DuMmY_HGS{/*keep emtpy*/}';
         document.getElementsByTagName('head')[0].appendChild(divClass);
         /*
          * create  dialog boxes
