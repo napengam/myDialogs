@@ -37,7 +37,7 @@ function myDialogs() {
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<select id=hgsmods_ccc  size=1></select></div><hr>',
-                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',             
+                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
                 '</div>'].join('');
 
 
@@ -62,7 +62,7 @@ function myDialogs() {
         aDiv.innerHTML = HTML;
 
         document.body.appendChild(aDiv);
-        
+
         aDiv.onclick = function () {
             dd[0].focus();
         };
@@ -122,19 +122,15 @@ function myDialogs() {
         divClass.innerHTML = '.divClass{width:auto;background:#dddbd1; border: 1px solid rgb(88, 121, 224);z-index:2000;' +
                 'border-radius: 5px;padding:8px; }';
         document.getElementsByTagName('head')[0].appendChild(divClass);
-        /*
-         * create  dialog boxes
-         */
-        cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog);
-        alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
-        prDiv = createDialogBox('hgsmodp_aaa', promptDialog);
-        slDiv = createDialogBox('hgsmods_aaa', selectDialog);
-    } else {
-        cdDiv = gebi('hgsmodc_aaa');
-        alDiv = gebi('hgsmoda_aaa');
-        prDiv = gebi('hgsmodp_aaa');
-        slDiv = gebi('hgsmods_aaa');
     }
+    alDiv = gebi('hgsmoda_aaa');
+    alDiv === null ? alDiv=createDialogBox('hgsmoda_aaa', alertDialog) : '';
+    cdDiv = gebi('hgsmodc_aaa');
+    cdDiv === null ? cdDiv=createDialogBox('hgsmodc_aaa', confirmDialog) : '';
+    prDiv = gebi('hgsmodp_aaa');
+    prDiv === null ? prDiv=createDialogBox('hgsmodp_aaa', promptDialog) : '';
+    slDiv = gebi('hgsmods_aaa');
+    slDiv === null ? slDiv=createDialogBox('hgsmods_aaa', selectDialog) : '';
     /*
      * The action within the alert box is just an OK button
      * In fact if you click anywhere within the alert box it will
@@ -144,7 +140,7 @@ function myDialogs() {
         a_text = htmlentity(a_text);
         if (veil) {
             gebi('hgsmoda_bbb').innerHTML = '';
-            gebi('hgsmoda_bbb').innerHTML = '<b>'+a_text.replace(/\n/gi, "<br>")+'</b>';
+            gebi('hgsmoda_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
             positionDialog('hgsmoda_aaa');
 
             gebi('hgsmoda_bbb_ok').onclick = function () {
