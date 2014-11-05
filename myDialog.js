@@ -51,24 +51,16 @@ function myDialogs() {
         };
     }
     function createDialogBox(id, HTML) {
-        var aDiv, dd;
-        aDiv = document.createElement('DIV');
+        var aDiv = document.createElement('DIV');
         aDiv.id = id;
         aDiv.style.display = 'none';
-
         aDiv.className = 'divClass';
         aDiv.style.zIndex = 10;
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
-
         document.body.appendChild(aDiv);
-
-        aDiv.onclick = function () {
-            dd[0].focus();
-        };
         makeDrag(aDiv);
         return aDiv;
-
     }
 
     function positionDialog(id) {
@@ -111,7 +103,7 @@ function myDialogs() {
         veil.innerHTML = '<hr style="visibility:hidden;margin:0;padding:0;width:1px;height:2000px">';
         document.body.appendChild(veil);
     }
-    if (gebi('hgsmodc_aaa') === null && gebi('hgsmoda_aaa') === null && gebi('hgsmodp_aaa') === null && gebi('hgsmods_aaa') === null) {
+    if (document.querySelector(".divClass")===null) {
         /*
          * create a class for the dialog boxes
          */
