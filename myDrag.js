@@ -1,7 +1,6 @@
-function makeDrag(obj, root) {
+function makeDrag(obj, root, mapFunc) {
     'use strict';
     var xy = {};
-
     if (typeof root === 'undefined') {
         root = obj;
     }
@@ -33,22 +32,27 @@ function makeDrag(obj, root) {
     }
     function start(e)
     {
-
         this.lastMouseX = e.clientX;
         this.lastMouseY = e.clientY;
         this.onmousemove = drag;
         this.onmouseup = end;
         this.style.cursor = 'move';
         return false;
-
     }
     function drag(e)
     {
-        var y = parseInt(this.style.top, 10),
+        var
+                y = parseInt(this.style.top, 10),
                 x = parseInt(this.style.left, 10);
 
         x = x + (e.clientX - this.lastMouseX);
         y = y + (e.clientY - this.lastMouseY);
+
+        if (typeof mapFunc === 'function') {
+            xy = mapFunc(this,x, y);
+            x = xy.x;
+            y = xy.y;
+        }
 
         this.style.left = x + "px";
         this.style.top = y + "px";
