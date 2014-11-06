@@ -5,7 +5,9 @@ function myDialogs() {
             keyDown = window.onkyedown,
             divClass, // will hold a css class
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = ['<div  id="hgsmodc_veil" >',
+            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
+                '<span style="float:right;color:#ff6200;font-weight:bold">Confirm<br></span>',
+                '<hr style="clear:both">',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
                 '<button id="modal_confirm_yes" tabindex=1 >Yes</button>',
@@ -13,7 +15,7 @@ function myDialogs() {
                 '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = ['<div  id="hgsmoda_veil">',
+            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
                 '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
@@ -22,7 +24,7 @@ function myDialogs() {
                 '</div>',
                 ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center">',
+            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
                 '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
@@ -31,8 +33,8 @@ function myDialogs() {
                 '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
                 '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = ['<div  id="hgsmods_veil">',
-                '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
+            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
+                '<span style="float:right;color:#ff6200;font-weight:bold">Select<br></span>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
@@ -51,7 +53,7 @@ function myDialogs() {
         };
     }
     function createDialogBox(id, HTML) {
-        var aDiv = document.createElement('DIV');
+        var dragHandle, aDiv = document.createElement('DIV');
         aDiv.id = id;
         aDiv.style.display = 'none';
         aDiv.className = 'divClass';
@@ -59,7 +61,8 @@ function myDialogs() {
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
         document.body.appendChild(aDiv);
-        makeDrag(aDiv);
+        dragHandle = aDiv.querySelector('.moveHandle');
+        makeDrag(dragHandle, aDiv);
         return aDiv;
     }
 
@@ -94,7 +97,7 @@ function myDialogs() {
         veil.style.width = '100%';
         veil.style.zIndex = -1;
         veil.style.background = 'white';
-        veil.style.visibility =  'hidden';
+        veil.style.visibility = 'hidden';
         veil.style.position = 'fixed';
         veil.style.top = '0px';
         veil.style.left = '0px';
@@ -103,7 +106,7 @@ function myDialogs() {
         veil.innerHTML = '<hr style="visibility:hidden;margin:0;padding:0;width:1px;height:2000px">';
         document.body.appendChild(veil);
     }
-    if (document.querySelector(".divClass")===null) {
+    if (document.querySelector(".divClass") === null) {
         /*
          * create a class for the dialog boxes
          */
@@ -118,13 +121,13 @@ function myDialogs() {
      * 
      */
     alDiv = gebi('hgsmoda_aaa');
-    alDiv === null ? alDiv=createDialogBox('hgsmoda_aaa', alertDialog) : '';
+    alDiv === null ? alDiv = createDialogBox('hgsmoda_aaa', alertDialog) : '';
     cdDiv = gebi('hgsmodc_aaa');
-    cdDiv === null ? cdDiv=createDialogBox('hgsmodc_aaa', confirmDialog) : '';
+    cdDiv === null ? cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog) : '';
     prDiv = gebi('hgsmodp_aaa');
-    prDiv === null ? prDiv=createDialogBox('hgsmodp_aaa', promptDialog) : '';
+    prDiv === null ? prDiv = createDialogBox('hgsmodp_aaa', promptDialog) : '';
     slDiv = gebi('hgsmods_aaa');
-    slDiv === null ? slDiv=createDialogBox('hgsmods_aaa', selectDialog) : '';
+    slDiv === null ? slDiv = createDialogBox('hgsmods_aaa', selectDialog) : '';
     /*
      * The action within the alert box is just an OK button
      * In fact if you click anywhere within the alert box it will
