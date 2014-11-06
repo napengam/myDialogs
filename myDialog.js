@@ -6,7 +6,6 @@ function myDialogs() {
             divClass, // will hold a css class
             cdDiv, // div for confirm dialog to hold the HTML below
             confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>Confirm</div>',
-               
                 '<hr style="clear:both">',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
