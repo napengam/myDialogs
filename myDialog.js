@@ -5,8 +5,8 @@ function myDialogs() {
             keyDown = window.onkyedown,
             divClass, // will hold a css class
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
-                '<span style="float:right;color:#ff6200;font-weight:bold">Confirm<br></span>',
+            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>Confirm</div>',
+               
                 '<hr style="clear:both">',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
@@ -15,8 +15,7 @@ function myDialogs() {
                 '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
-                '<span style="float:right;color:#ff6200;font-weight:bold">Alert<br></span>',
+            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>Alert</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
@@ -24,8 +23,7 @@ function myDialogs() {
                 '</div>',
                 ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
-                '<span style="float:right;color:#ff6200;font-weight:bold">Prompt<br></span>',
+            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >Prompt</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
@@ -33,8 +31,7 @@ function myDialogs() {
                 '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
                 '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
-                '<span style="float:right;color:#ff6200;font-weight:bold">Select<br></span>',
+            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>Select</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',

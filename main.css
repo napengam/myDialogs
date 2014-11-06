@@ -147,6 +147,8 @@ code{
     width:100%;
     padding-bottom:0px;
     background-image: url("stripes.gif");
+    text-align:right;
+    color:#ff6200;font-weight:bold
 }
 .trans {
 -webkit-transition:All 1s ease;
