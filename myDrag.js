@@ -1,15 +1,22 @@
-function makeDrag(obj) {
+function makeDrag(obj, root) {
     'use strict';
     var xy = {};
 
-    if (obj.style.position !== 'absolute') {
-        xy = absPos(obj);
-        obj.style.top = xy.y + 'px';
-        obj.style.left = xy.x + 'px';
-        obj.style.position = 'absolute';
-        
+    if (typeof root === 'undefined') {
+        root = obj;
     }
-    obj.onmousedown = start;
+    if (root.style.position !== 'absolute') {
+        xy = absPos(root);
+        root.style.top = xy.y + 'px';
+        root.style.left = xy.x + 'px';
+        root.style.position = 'absolute';
+    }
+    obj.onmousedown = function (e) {
+        if (!e) {
+            e = window.event;
+        }
+        start.bind(root)(e);
+    };
 
     function absPos(obj)
     {// return absolute x,y position of obj
@@ -26,14 +33,14 @@ function makeDrag(obj) {
     }
     function start(e)
     {
-        if (e.ctrlKey) {
-            this.lastMouseX = e.clientX;
-            this.lastMouseY = e.clientY;
-            this.onmousemove = drag;
-            this.onmouseup = end;
-            this.style.cursor='move';
-            return false;
-        }
+
+        this.lastMouseX = e.clientX;
+        this.lastMouseY = e.clientY;
+        this.onmousemove = drag;
+        this.onmouseup = end;
+        this.style.cursor = 'move';
+        return false;
+
     }
     function drag(e)
     {
@@ -53,6 +60,6 @@ function makeDrag(obj) {
     {
         this.onmousemove = null;
         this.onmouseup = null;
-         this.style.cursor='';
+        this.style.cursor = '';
     }
 }
