@@ -40,7 +40,7 @@ function myDialogs() {
 
 
     function gebi(id) {
-        return document.getElementById(id)
+        return document.getElementById(id);
     }
 
     function vailOnClick(id) {
@@ -67,16 +67,12 @@ function myDialogs() {
         veil.style.visibility = 'visible';
         veil.style.zIndex = 5;
         aDiv = gebi(id);
-        aDiv.style.top = 0;
-        aDiv.style.left = 0;
-        aDiv.style.display = 'block';
-        aDiv.style.position = 'fixed';
-
         x = window.innerWidth;
         y = window.innerHeight;
+        aDiv.style.display = '';
+        aDiv.style.position = 'fixed';
         cw = aDiv.clientWidth;
         ch = aDiv.clientHeight;
-
         aDiv.style.top = (y - ch) / 2 + 'px';
         aDiv.style.left = (x - cw) / 2 + 'px';
     }
