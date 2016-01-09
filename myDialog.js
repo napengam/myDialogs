@@ -5,7 +5,7 @@ function myDialogs() {
             keyDown = window.onkyedown,
             divClass, // will hold a css class
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>Confirm</div>',
+            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
@@ -14,7 +14,7 @@ function myDialogs() {
                 '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>Alert</div>',
+            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
@@ -22,7 +22,7 @@ function myDialogs() {
                 '</div>',
                 ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >Prompt</div>',
+            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
@@ -30,13 +30,21 @@ function myDialogs() {
                 '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
                 '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>Select</div>',
+            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
                 '<hr style="clear:both">',
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<select id=hgsmods_ccc  size=1></select></div><hr>',
                 '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
-                '</div>'].join('');
+                '</div>'].join(''),
+            inDiv, //div for alert box to hold HTML below
+            informDialog = ['<div  id="hgsmodi_veil"><div  class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodi_bbb"> you should never see this </span><hr>',
+                '<div style="text-align:center" >',
+                '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>',
+                '</div>',
+                ''].join('');
 
 
     function gebi(id) {
@@ -53,7 +61,7 @@ function myDialogs() {
         aDiv.id = id;
         aDiv.style.display = 'none';
         aDiv.className = 'divClass';
-        aDiv.style.zIndex = 10;
+        aDiv.style.zIndex = 22;
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
         document.body.appendChild(aDiv);
@@ -65,7 +73,7 @@ function myDialogs() {
     function positionDialog(id) {
         var aDiv, x, y, cw, ch;
         veil.style.visibility = 'visible';
-        veil.style.zIndex = 5;
+        veil.style.zIndex = 20;
         aDiv = gebi(id);
         x = window.innerWidth;
         y = window.innerHeight;
@@ -81,14 +89,14 @@ function myDialogs() {
      * Probably already created by myBackend.js
      * 
      */
-    veil = document.getElementById('veilFromBackend');
+    veil = document.getElementById('veilFromDialog');
     if (veil === null) {
         veil = document.createElement('DIV');
         veil.tabIndex = -1;
-        veil.id = 'veilFromBackend';
+        veil.id = 'veilFromDialog';
         veil.style.width = '100%';
         veil.style.zIndex = -1;
-        veil.style.background = 'white';
+        veil.style.background = 'rgba(255, 255, 255, 0.18)';
         veil.style.visibility = 'hidden';
         veil.style.position = 'fixed';
         veil.style.top = '0px';
@@ -104,7 +112,7 @@ function myDialogs() {
          */
         divClass = document.createElement('style');
         divClass.type = 'text/css';
-        divClass.innerHTML = '.divClass{width:auto;background:#dddbd1; border: 1px solid rgb(88, 121, 224);z-index:2000;' +
+        divClass.innerHTML = '.divClass{width:auto;background:white; border: 1px solid blue;z-index:2000;' +
                 'border-radius: 5px;padding:8px; }';
         document.getElementsByTagName('head')[0].appendChild(divClass);
     }
@@ -120,13 +128,30 @@ function myDialogs() {
     prDiv === null ? prDiv = createDialogBox('hgsmodp_aaa', promptDialog) : '';
     slDiv = gebi('hgsmods_aaa');
     slDiv === null ? slDiv = createDialogBox('hgsmods_aaa', selectDialog) : '';
+    inDiv = gebi('hgsmodi_aaa');
+    inDiv === null ? inDiv = createDialogBox('hgsmodi_aaa', informDialog) : '';
+    /****
+     Information dialog
+     ****/
+    function myInform(a_text) {
+
+        gebi('hgsmodi_bbb').innerHTML = '';
+        gebi('hgsmodi_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog('hgsmodi_aaa');
+        veil.style.zIndex = -1;
+        veil.style.visibility = 'hidden';
+        gebi('hgsmodi_bbb_ok').onclick = function () {
+            inDiv.style.display = 'none';
+        };
+        gebi('hgsmodi_bbb_ok').focus();
+    }
     /*
      * The action within the alert box is just an OK button
      * In fact if you click anywhere within the alert box it will
      * disapear.
      */
     function myAlert(a_text) {
-        a_text = htmlentity(a_text);
+        //a_text = htmlentity(a_text);
         if (veil) {
             gebi('hgsmoda_bbb').innerHTML = '';
             gebi('hgsmoda_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
@@ -294,6 +319,7 @@ function myDialogs() {
      * Here we  reveal the dialogs/functions to the caller
      */
     return {
+        myInform: myInform, //(text)
         myAlert: myAlert, //(text)
         myConfirm: myConfirm, //(text,callYes,callNo)
         myPrompt: myPrompt, //(text,default Value,callOnEnter)

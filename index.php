@@ -54,13 +54,14 @@ The latest version can allways be found at http://hgsweb.de
                 document.getElementById('out').innerHTML = '<b style="color:black">' + htmlentity(v);
             }
             function callOnSelect(option) {
-                document.getElementById('out').innerHTML = '<b style="color:white">' + htmlentity(option.value);
+                document.getElementById('out').innerHTML = '<b style="color:black">' + htmlentity(option.value);
             }
             addEvent(window, 'resize', function () {
                 moveToBottom('foot');
             });
             addEvent(window, 'load', function () {
                 theDialogs = myDialogs();
+                myInform = theDialogs.myInform;
                 myAlert = theDialogs.myAlert;
                 myConfirm = theDialogs.myConfirm;
                 myPrompt = theDialogs.myPrompt;
@@ -89,6 +90,7 @@ The latest version can allways be found at http://hgsweb.de
             <p>Move boxes using the striped area.
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
+                <button  onclick='myInform("<h1>The Information Box!<br>Not modal")'>Just show some information</button>
                 <button  onclick='myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
                 <button  onclick='myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
                 <button  onclick='myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
@@ -98,7 +100,7 @@ The latest version can allways be found at http://hgsweb.de
         </div>
         <div id=foot class="foot trans"> 
             <span class="footText">
-                &copy;2007 - 2013 <a href="http://athos-calling.com/hgs/html/index_1.php" style="color:white;">Heinrich Schweitzer</a> All rights reserved.
+                &copy;2007 - 2014 <a href="http://athos-calling.com/hgs/html/index_1.php" style="color:white;">Heinrich Schweitzer</a> All rights reserved.
             </span>             
         </div>       
     </body>
