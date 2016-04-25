@@ -86,7 +86,7 @@ The latest version can allways be found at http://hgsweb.de
                 <span class="small"><b></b></span>                                     
             </div>
             <p class="title">Alert , Confirmation , Prompt Dialog
-                <span class="small">All source code is included in this page</span>  </p>
+                <span class="small">All source code is included in this page</span>  </p> 
             <p>Move boxes using the striped area.
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">

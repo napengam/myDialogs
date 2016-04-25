@@ -57,7 +57,7 @@ function myDialogs() {
         };
     }
     function createDialogBox(id, HTML) {
-        var dragHandle, aDiv = document.createElement('DIV');
+        var t, l, aDiv = document.createElement('DIV');
         aDiv.id = id;
         aDiv.style.display = 'none';
         aDiv.className = 'divClass';
@@ -65,8 +65,21 @@ function myDialogs() {
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
         document.body.appendChild(aDiv);
-        dragHandle = aDiv.querySelector('.moveHandle');
-        makeDrag(dragHandle, aDiv);
+        aDiv.draggable = true;
+        aDiv.addEventListener("dragend", function (event) {
+            event.target.style.position = "absolute";
+            t = event.target.offsetTop + (event.screenY - this.hgsY);
+            l = event.target.offsetLeft + (event.screenX - this.hgsX);
+            event.target.style.top = t + 'px';
+            event.target.style.left = l + 'px';
+        }, false);
+        aDiv.addEventListener("dragstart", function (event) {
+            //save current screen position;
+            this.hgsX = event.screenX;
+            this.hgsY = event.screenY;
+
+        }, false);
+
         return aDiv;
     }
 
