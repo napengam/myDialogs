@@ -1,7 +1,7 @@
 myDialogs
 =========
 
-JavaScript to create 'modal'  Alert, Confirm, Prompt and Select Dialogs 
+JavaScript to create 'modal'  various dialogs like Alert, Confirm, Prompt and Select 
 
 See the index.html for usage and myDialogs.js for implementation
 
