@@ -34,7 +34,8 @@ The latest version can allways be found at http://hgsweb.de
         <link href="main.css" type="text/css" rel="stylesheet" >    
         <script src="moveToBottom.js"></script>
         <script src="myDialog.js"></script>
-        <script src="myDrag.js"></script>
+        <script src="myVeil.js"></script>
+
         <script type="text/javascript">
             function addEvent(obj, ev, fu) {
                 if (obj.addEventListener) {
@@ -44,6 +45,7 @@ The latest version can allways be found at http://hgsweb.de
                     obj.attachEvent(eev, fu);
                 }
             }
+            
             function callYes() {
                 document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';
             }
@@ -62,10 +64,12 @@ The latest version can allways be found at http://hgsweb.de
             addEvent(window, 'load', function () {
                 theDialogs = myDialogs();
                 myInform = theDialogs.myInform;
+                myLogin = theDialogs.myLogin;
                 myAlert = theDialogs.myAlert;
                 myConfirm = theDialogs.myConfirm;
                 myPrompt = theDialogs.myPrompt;
                 mySelect = theDialogs.myPromptSelect;
+                db = theDialogs.myDialogBox;
                 moveToBottom('foot');
             });
             function htmlentity(value) {
@@ -90,17 +94,23 @@ The latest version can allways be found at http://hgsweb.de
             <p>Move boxes using the striped area.
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
+                <input type=text siye=20>
                 <button  onclick='myInform("<h1>The Information Box!<br>Not modal")'>Just show some information</button>
+                <button  onclick='myLogin("Please Log In")'>Login Dialog</button>
                 <button  onclick='myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
                 <button  onclick='myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
                 <button  onclick='myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
                 <button  onclick="mySelect('<h2>Please select</h2>', 'value1|< 5|description &1,value2|text2|description 2', callOnSelect)">Show Select Dialog</button>
+                <button  onclick="db({text: 'Hallo', actions: [
+                                {text: 'ok', func: theDialogs.dialogsClean},
+                                {text: 'okok', func: theDialogs.dialogsClean},
+                                {text: 'NEIN', func: theDialogs.dialogsClean} ]})">Show general Dialog</button>
             </div>
             <p> Once a dialog pops up you should no longer be able to press any of the buttons above       
         </div>
         <div id=foot class="foot trans"> 
             <span class="footText">
-                &copy;2007 - 2014 <a href="http://athos-calling.com/hgs/html/index_1.php" style="color:white;">Heinrich Schweitzer</a> All rights reserved.
+                &copy;2007 - 2014 <a href="http://athos-calling.com/hgs/html/index_1.php" style="color:white;">Heinrich Schweitzer</a> All rights reservetheDialogs.
             </span>             
         </div>       
     </body>
