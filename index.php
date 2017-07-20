@@ -31,8 +31,7 @@ The latest version can allways be found at http://hgsweb.de
     <head>
         <title>Alert and Confirm</title>
         <meta charset="UTF-8">
-        <link href="main.css" type="text/css" rel="stylesheet" >    
-        <script src="moveToBottom.js"></script>
+
         <script src="myDialog.js"></script>
         <script src="myVeil.js"></script>
 
@@ -45,7 +44,7 @@ The latest version can allways be found at http://hgsweb.de
                     obj.attachEvent(eev, fu);
                 }
             }
-            
+
             function callYes() {
                 document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';
             }
@@ -58,9 +57,7 @@ The latest version can allways be found at http://hgsweb.de
             function callOnSelect(option) {
                 document.getElementById('out').innerHTML = '<b style="color:black">' + htmlentity(option.value);
             }
-            addEvent(window, 'resize', function () {
-                moveToBottom('foot');
-            });
+
             addEvent(window, 'load', function () {
                 theDialogs = myDialogs();
                 myInform = theDialogs.myInform;
@@ -70,7 +67,7 @@ The latest version can allways be found at http://hgsweb.de
                 myPrompt = theDialogs.myPrompt;
                 mySelect = theDialogs.myPromptSelect;
                 db = theDialogs.myDialogBox;
-                moveToBottom('foot');
+              
             });
             function htmlentity(value) {
                 value = value.replace(/&/gi, "&amp;");
@@ -84,14 +81,10 @@ The latest version can allways be found at http://hgsweb.de
     </head>
     <body>    
         <div class="content">
-            <div class="divhead" >                                                       
-                <i><a href="../index.php"> <img  src="../home.png"></a><b  class="headLine">&nbsp;PHP &amp; JavaScript &amp; HTML &amp; CSS </b></i>
-                <b></b>
-                <span class="small"><b></b></span>                                     
-            </div>
+
             <p class="title">Alert , Confirmation , Prompt Dialog
-                <span class="small">All source code is included in this page</span>  </p> 
-            <p>Move boxes using the striped area.
+                <span >All source code is included in this page</span>  </p> 
+
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
                 <input type=text siye=20>
@@ -101,17 +94,13 @@ The latest version can allways be found at http://hgsweb.de
                 <button  onclick='myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
                 <button  onclick='myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
                 <button  onclick="mySelect('<h2>Please select</h2>', 'value1|< 5|description &1,value2|text2|description 2', callOnSelect)">Show Select Dialog</button>
-                <button  onclick="db({text: 'Hallo', actions: [
+                <button  onclick="db({text: '<h2>Hallo splash bang bumm', actions: [
                                 {text: 'ok', func: theDialogs.dialogsClean},
-                                {text: 'okok', func: theDialogs.dialogsClean},
-                                {text: 'NEIN', func: theDialogs.dialogsClean} ]})">Show general Dialog</button>
+                                {text: '<button>okok</button>', func: theDialogs.dialogsClean},
+                                {text: 'NEIN', func: theDialogs.dialogsClean}]})">Show general Dialog</button>
             </div>
             <p> Once a dialog pops up you should no longer be able to press any of the buttons above       
         </div>
-        <div id=foot class="foot trans"> 
-            <span class="footText">
-                &copy;2007 - 2014 <a href="http://athos-calling.com/hgs/html/index_1.php" style="color:white;">Heinrich Schweitzer</a> All rights reservetheDialogs.
-            </span>             
-        </div>       
+
     </body>
 </html>
