@@ -69,7 +69,7 @@ function myVeil() {
         oh = obj.clientHeight;
         ww = veil.style.height = window.innerWidth;
         wh = veil.style.height = window.innerHeight;
-        obj.style.position = 'absolute';
+        obj.style.position = 'fixed';
         obj.style.top = (wh / 2 - oh / 2) + 'px';
         obj.style.left = (ww / 2 - ow / 2) + 'px';
         obj.style.zIndex = veil.style.zIndex + 1;
