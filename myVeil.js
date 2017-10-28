@@ -18,7 +18,7 @@ function myVeil() {
         veil.style.zIndex = -1;
         veil.style.background = 'rgba(255, 255, 255, 0.18)';
         veil.style.visibility = 'hidden';
-        veil.style.display = 'nones';
+        veil.style.display = 'none';
         veil.style.position = 'fixed';
         veil.style.top = '0px';
         veil.style.left = '0px';
