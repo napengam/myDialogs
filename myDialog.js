@@ -1,80 +1,96 @@
 function myDialogs() {
     'use strict';
     var
-            veil = myVeil(), openDialogs = [],
+            veil = myVeil(),
+            openDialogs = [],
             keyDown = window.onkyedown,
             divClass, // will hold a css class
-            t = new Date().getTime(),
-            gdDiv, // div for confirm dialog to hold the HTML below 
+            d = new Date(),
+            t = d.getTime(),
+            gdDiv, // div for confirm dialog to hold the HTML below
             generalDialog = ['<div style="text-align:center">',
-                '<span class=t' + t + ' >you should never see this</span><p>',
+                '<span  id="hgsgdText">you should never see this</span><p>',
                 '<div  id=hgsgdActions style="text-align:center">',
                 '</div>',
                 '</div>'].join(''),
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = [
-                '<span  class=t' + t + '>you should never see this</span><hr>',
+            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
                 '<button id="modal_confirm_yes" tabindex=1 >Yes</button>',
                 '<button id="modal_confirm_no" tabindex=2 >No</button>',
+                '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = [
-                '<span class=t' + t + '> you should never see this </span><hr>',
+            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
-                '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button></div>'].join(''),
+                '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button>',
+                '</div>',
+                ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = [
-                '<span  class=t' + t + '> you should never see this </span><hr>',
+            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
-                '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>'].join(''),
+                '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
+                '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = [
-                '<span  class=t' + t + '> you should never see this </span><hr>',
+            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<select id=hgsmods_ccc  size=1></select></div><hr>',
-                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>'].join(''),
+                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
+                '</div>'].join(''),
             inDiv, //div for alert box to hold HTML below
-            informDialog = [
-                '<span  class=t' + t + '> you should never see this </span><hr>',
+            informDialog = ['<div  id="hgsmodi_veil"><div  class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodi_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
-                '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>'].join(''),
+                '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>',
+                '</div>',
+                ''].join(''),
             poDiv, //div for alert box to hold HTML below
-            progressDialog = [
-                '<span  class=t' + t + '> you should never see this </span><hr>',
-                '<div style="text-align:center" >'].join(''),
+            progressDialog = ['<div  id="hgsmodpo_veil"><div  class=moveHandle>&nbsp;</div>',
+                '<hr style="clear:both">',
+                '<span  id="hgsmodpo_bbb"> you should never see this </span><hr>',
+                '<div style="text-align:center" >', '</div>',
+                ''].join(''),
             loDiv, //div for login box to hold HTML below
-            loginDialog = [
-                '<span  class=t' + t + ' style="text-align:center;"> you should never see this </span><hr><br>',
+            loginDialog = ['<div  id="hgsmodl_veil"><div  class=moveHandle>&nbsp;</div>',
+                '<hr>',
+                '<span  id="hgsmodl_bbb" style="text-align:center;"> you should never see this </span><hr><br>',
                 '<div style="text-align:left"><p>',
+                '<form id=logon name=logonf  method=post>',
                 '<b>User:</b> <input tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
                 '<b>Password:</b> <input tabindex=1  name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
                 '<p id=passwd2hide style="display:none"><b>Repeat Password:</b> <input id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
-                '<hr><p style="text-align:center;" ><input type=submit value="logon" id="hgsmodl_bbb_ok" tabindex=1 >'].join('');
-
-    //************************************************
-    // initialize and create all dialogs
-    //************************************************
-
-
-    if (document.querySelector(".divClass" + t) === null) {
+                '<hr><p style="text-align:center;" ><input type=submit value=Anmelden id="hgsmodl_bbb_ok" tabindex=1 ></form>',
+                '</div>',
+                ''].join('');
+    /*
+     */
+    if (document.querySelector(".divClass") === null) {
         divClass = document.createElement('style');
         divClass.type = 'text/css';
-        divClass.innerHTML = '.divClass' + t + '{xbox-shadow: 1px -2px 20px 2px #fbf4f4;width: auto;background: rgba(243, 243, 243, 0.68);border: 0px solid blue;' +
-                'z-index: 2000;padding: 8px }';
-
+        divClass.innerHTML = '.divClass' + t + '{box-shadow: 9px 9px 28px 0px gray; width:auto;background:#dbd9e0; border: 0px solid blue;' +
+                'padding:8px; }';
         document.getElementsByTagName('head')[0].appendChild(divClass);
     }
 
-    alDiv = createDialogBox(alertDialog);
-    cdDiv = createDialogBox(confirmDialog);
-    prDiv = createDialogBox(promptDialog);
-    slDiv = createDialogBox(selectDialog);
-    inDiv = createDialogBox(informDialog);
-    loDiv = createDialogBox(loginDialog);
-    poDiv = createDialogBox(progressDialog);
-    gdDiv = createDialogBox(generalDialog);
+
+    alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
+    cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog);
+    prDiv = createDialogBox('hgsmodp_aaa', promptDialog);
+    slDiv = createDialogBox('hgsmods_aaa', selectDialog);
+    inDiv = createDialogBox('hgsmodi_aaa', informDialog);
+    loDiv = createDialogBox('hgsmodl_aaa', loginDialog);
+    poDiv = createDialogBox('hgsmodpo_aaa', progressDialog);
+    gdDiv = createDialogBox('hgsmodgd', generalDialog);
     /*
      ************************************************
      * functions below
@@ -85,20 +101,24 @@ function myDialogs() {
         return document.getElementById(id);
     }
 
-
-    /**
-     ************************************************
-     * creat dialogbox if it does  not exits
-     ************************************************
-     **/
-    function createDialogBox(HTML) {
-
+    function vailOnClick(id) {
+        veil.onclick = function () {
+            gebi(id).focus();
+        };
+    }
+    function createDialogBox(id, HTML) {
         var to, le, aDiv;
 
+
+        aDiv=document.getElementById(id);
+        if (aDiv) {
+            return aDiv;
+        }
         aDiv = document.createElement('DIV');
+        aDiv.id = id;
         aDiv.style.display = 'none';
         aDiv.className = 'divClass' + t;
-        aDiv.style.zIndex = 22;
+        // aDiv.style.zIndex = 22;
         aDiv.style.position = 'absolute';
         aDiv.innerHTML = HTML;
         document.body.appendChild(aDiv);
@@ -119,20 +139,6 @@ function myDialogs() {
         return aDiv;
     }
 
-    function positionDialog(aDiv) {
-
-        veil.veilOn();
-        aDiv.style.display = 'block';
-        aDiv.style.top = '-200px';
-        aDiv.style.left = '-200px';
-
-        veil.veilSnapToCenter(aDiv);
-        openDialogs.push(aDiv);
-    }
-    //************************************************
-    // close all dialogs
-    //************************************************
-
     function dialogsClean() {
         openDialogs.forEach(function (elem) {
             elem.style.display = 'none';
@@ -141,37 +147,48 @@ function myDialogs() {
         openDialogs = [];
     }
 
+    function positionDialog(id) {
+        var aDiv;
+        dialogsClean();
+        veil.veilOn();
+        aDiv = gebi(id);
+        aDiv.style.display = 'block';
+        veil.veilSnapToCenter(aDiv);
+        openDialogs.push(aDiv);
+    }
     //************************************************
     // most general dialogbox
     //************************************************
 
-    function myDialogBox(cfg) { //cfg={text:'splash to display', actions:[{text:'text for action' , func:pointerToFunction}]}
-        var html = [], elem = gdDiv.querySelector(('.t' + t));
-        elem.innerHTML = cfg.text; // spalsh text
+    function myDialogBox(cfg) {
+        var html = [], st, elem = gdDiv.querySelector('#hgsgdText');
+        elem.innerHTML = cfg.text;
         elem = gdDiv.querySelector('#hgsgdActions');
-        // first add the action text within a span element
         cfg.actions.forEach(function (action) {
-            html.push('<span tabindex=1 style="cursor:pointer;background-color:white;padding:4px;margin:8px;border-radius:4px 4px 4px 4px" class=c'
-                    + t + '>' + action.text + '</span>');
+            html.push('<span style="cursor:pointer;\n\
+background-color:white;\n\
+padding:4px;\n\
+margin:8px;\n\
+border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
         });
         elem.innerHTML = html.join('');
-        positionDialog(gdDiv);
-        // iterate over  all span elements to add function callback 
+        positionDialog('hgsmodgd');
         elem = gdDiv.querySelectorAll('.c' + t);
         [].forEach.call(elem, function (sp) {
             sp.addEventListener('click', cfg.actions.shift().func, false);
         });
-        window.onkeyup = handleKeyDown;
         return gdDiv;
     }
+
     /****
      Information dialog
      ****/
     function myInform(a_text) {
 
-        inDiv.querySelector('.t' + t).innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog(inDiv);
-        veil.veilOff();
+        gebi('hgsmodi_bbb').innerHTML = '';
+        gebi('hgsmodi_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog('hgsmodi_aaa');
+        veil.veilOff()
         gebi('hgsmodi_bbb_ok').onclick = function () {
             inDiv.style.display = 'none';
         };
@@ -183,23 +200,22 @@ function myDialogs() {
      * disapear.
      */
     function myLogin(a_text, action, repeat, user) {
-        var obj;
-        loDiv.querySelector('.t' + t).innerHTML = '<h1 style=text-align:center;">' + a_text.replace(/\n/gi, "<br>") + '</h1>';
-        positionDialog(loDiv);
+
+        gebi('hgsmodl_bbb').innerHTML = '';
+        gebi('hgsmodl_bbb').innerHTML = '<h1 style=text-align:center;">' + a_text.replace(/\n/gi, "<br>") + '</h1>';
+        positionDialog('hgsmodl_aaa');
         if (repeat) {
             gebi('passwd2hide').style.display = '';
             gebi('user').value = user;
         }
-        obj = gebi('hgsmodl_bbb_ok');
-
-        obj.onclick = function () {
+        gebi('hgsmodl_bbb_ok').form.action = action;
+        gebi('hgsmodl_bbb_ok').onclick = function () {
             loDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
         };
-        obj.focus();
+        gebi('hgsmodl_bbb_ok').focus();
         window.onkeydown = handleKeyDown;
-
         return;
     }
     /*
@@ -209,25 +225,26 @@ function myDialogs() {
      */
     function myAlert(a_text) {
 
-        alDiv.querySelector('.t' + t).innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog(alDiv);
+
+        gebi('hgsmoda_bbb').innerHTML = '';
+        gebi('hgsmoda_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog('hgsmoda_aaa');
         gebi('hgsmoda_bbb_ok').onclick = function () {
             alDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
-            return;
         };
         gebi('hgsmoda_bbb_ok').focus();
         window.onkeydown = handleKeyDown;
-
         return;
     }/*
      *
      *Progress.
      */
     function myProgress(a_text) {
-        poDiv.querySelector('.t' + t).innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog(poDiv);
+        gebi('hgsmodpo_bbb').innerHTML = '';
+        gebi('hgsmodpo_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog('hgsmodpo_aaa');
         return;
     }
     /*
@@ -238,8 +255,10 @@ function myDialogs() {
      */
     function myConfirm(a_text, callYes, callNo) {
 
-        cdDiv.querySelector('.t' + t).innerHTML = a_text.replace(/\n/gi, "<br>");
-        positionDialog(cdDiv);
+        //a_text = htmlentity(a_text);
+
+        positionDialog('hgsmodc_aaa');
+        gebi('hgsmodc_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
         gebi('modal_confirm_yes').onclick = function () {
             cdDiv.style.display = 'none';
             veil.veilOff();
@@ -253,22 +272,21 @@ function myDialogs() {
             callNo();
         };
         gebi('modal_confirm_no').focus();
-        //vailOnclick('modal_confirm_no');
+        vailOnClick('modal_confirm_no');
         window.onkeydown = handleKeyDown;
-
         return;
     }
-    // ***********************************************   
-    //      The action within the prompt by enter box 
-    //      f the OK button is pressed the callOnEnter function is called
-    //     with value of the input box as a parameter
-    // ************************************************
-
-
+    /*
+     * The action within the prompt by enter box 
+     * If the OK button is pressed the callOnEnter function is called
+     * with value of the input box as a parameter
+     * 
+     * */
     function myPrompt(a_text, defaultValue, callOnEnter) {
+        //a_text = htmlentity(a_text);
 
-        prDiv.querySelector('.t' + t).innerHTML = a_text.replace(/\n/gi, "<br>");
-        positionDialog(prDiv);
+        positionDialog('hgsmodp_aaa');
+        gebi('hgsmodp_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
         gebi('hgsmodp_ccc').value = defaultValue;
         gebi('hgsmodp_ddd').onclick = function () {
             prDiv.style.display = 'none';
@@ -277,23 +295,21 @@ function myDialogs() {
             callOnEnter(gebi('hgsmodp_ccc').value);
         };
         gebi('hgsmodp_ccc').focus();
-        //vailOnclick('hgsmodp_ccc');
+        vailOnClick('hgsmodp_ccc');
         window.onkeydown = handleKeyDown;
-
         return;
     }
-    //************************************************
-    // The action within the prompt by select box 
-    //If the OK button is pressed the callOnSelect function is called
-    // with the selected option object
-    //************************************************
-
+    /*
+     * The action within the prompt by select box 
+     * If the OK button is pressed the callOnSelect function is called
+     * with the selected option object
+     * 
+     * */
     function myPromptSelect(a_text, options, callOnSelect) {
-
+        //a_text = htmlentity(a_text);
         var n, i, sel, o0, o1, v, o, d, op, that;
-
-        positionDialog(slDiv);
-        slDiv.querySelector('.t' + t).innerHTML = a_text.replace(/\n/gi, "<br>");
+        positionDialog('hgsmods_aaa');
+        gebi('hgsmods_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
         sel = gebi('hgsmods_ccc');
         n = sel.options.length;
         for (i = 0; i < n; i++) {
@@ -331,26 +347,21 @@ function myDialogs() {
             callOnSelect(that.options[that.selectedIndex]);
         };
         gebi('hgsmods_ccc').focus();
-
-        window.onkeydown = handleKeyDown;
-
+        vailOnClick('hgsmods_ccc');
         return;
     }
     function handleKeyDown(e) {
-        var blur = true, keyCode = e.keyCode || e.which;
+        var keyCode = e.keyCode || e.which;
         if ([9, 13, 32, 27].indexOf(keyCode) === -1) {
             // Don't do work on keys we don't care about.
             return;
         }
-
-        if (keyCode === 9 || (keyCode === 9 && e.shiftKey)) {
+        if (keyCode === 9) {
             if (e.target.id === 'user') {
                 gebi('pass').focus();
-                blur=false;
             }
             if (e.target.id === 'pass' && gebi('passwd2id') !== NULL) {
                 gebi('passwd2id').focus();
-                blur=false;
             }
             if (typeof e.stopPropagation === 'function') {
                 e.stopPropagation();
@@ -358,13 +369,19 @@ function myDialogs() {
             } else if (window.event && window.event.hasOwnProperty('cancelBubble')) {
                 window.event.cancelBubble = true;
             }
-            blur ? e.target.blur() : '';
         }
     }
-    //************************************************
-    //   reveal the function to the consumer
-    //************************************************
-
+    function htmlentity(value) {
+        value = value.replace(/&/gi, "&amp;");
+        value = value.replace(/</gi, "&lt;");
+        value = value.replace(/>/gi, "&gt;");
+        value = value.replace(/"/gi, "&quot;");
+        value = value.replace(/'/gi, "&#039;");
+        return value;
+    }
+    /*
+     * Here we  reveal the dialogs/functions to the caller
+     */
     return {
         myDialogBox: myDialogBox, //(text)
         myInform: myInform, //(text)
@@ -373,7 +390,7 @@ function myDialogs() {
         myConfirm: myConfirm, //(text,callYes,callNo)
         myPrompt: myPrompt, //(text,default Value,callOnEnter)
         myProgress: myProgress, //(text)
-        myPromptSelect: myPromptSelect, //(text,option-list,callOnSelect)
+        myPromptSelect: myPromptSelect, //(text,option-list,callOnSelect),
         dialogsClean: dialogsClean
     };
 }
