@@ -14,54 +14,54 @@ function myDialogs() {
                 '</div>',
                 '</div>'].join(''),
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = ['<div  id="hgsmodc_veil" ><div class=moveHandle>&nbsp;</div>',
-                '<hr style="clear:both">',
+            confirmDialog = ['<div   ><div class=moveHandle>&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
                 '<div style="text-align:center">',
-                '<button id="modal_confirm_yes" tabindex=1 >Yes</button>',
-                '<button id="modal_confirm_no" tabindex=2 >No</button>',
+                '<button data-button=yes tabindex=1 >Yes</button>',
+                '<button data-button=no  tabindex=2 >No</button>',
                 '</div>',
                 '</div>'].join(''),
             alDiv, //div for alert box to hold HTML below
-            alertDialog = ['<div  id="hgsmoda_veil"><div  class=moveHandle>&nbsp;</div>',
-                '<hr style="clear:both">',
+            alertDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
                 '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button>',
                 '</div>',
                 ''].join(''),
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = ['<div  id="hgsmodp_veil" style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
-                '<hr style="clear:both">',
+            promptDialog = ['<div   style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
                 '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
                 '</div>'].join(''),
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = ['<div  id="hgsmods_veil"><div class=moveHandle>&nbsp;</div>',
-                '<hr style="clear:both">',
+            selectDialog = ['<div><div class=moveHandle>&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center">',
                 '<select id=hgsmods_ccc  size=1></select></div><hr>',
                 '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
                 '</div>'].join(''),
             inDiv, //div for alert box to hold HTML below
-            informDialog = ['<div  id="hgsmodi_veil"><div  class=moveHandle>&nbsp;</div>',
-                '<hr style="clear:both">',
+            informDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmodi_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >',
                 '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>',
                 '</div>',
                 ''].join(''),
             poDiv, //div for alert box to hold HTML below
-            progressDialog = ['<div  id="hgsmodpo_veil"><div  class=moveHandle>&nbsp;</div>',
-                '<hr style="clear:both">',
+            progressDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+                '<hr>',
                 '<span  id="hgsmodpo_bbb"> you should never see this </span><hr>',
                 '<div style="text-align:center" >', '</div>',
                 ''].join(''),
             loDiv, //div for login box to hold HTML below
-            loginDialog = ['<div  id="hgsmodl_veil"><div  class=moveHandle>&nbsp;</div>',
+            loginDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
                 '<hr>',
                 '<span  id="hgsmodl_bbb" style="text-align:center;"> you should never see this </span><hr><br>',
                 '<div style="text-align:left"><p>',
@@ -110,7 +110,7 @@ function myDialogs() {
         var to, le, aDiv;
 
 
-        aDiv=document.getElementById(id);
+        aDiv = document.getElementById(id);
         if (aDiv) {
             return aDiv;
         }
@@ -151,7 +151,11 @@ function myDialogs() {
         var aDiv;
         dialogsClean();
         veil.veilOn();
-        aDiv = gebi(id);
+        if (typeof id === 'string' && id !== '') {
+            aDiv = gebi(id);
+        } else {
+            aDiv = id;
+        }
         aDiv.style.display = 'block';
         veil.veilSnapToCenter(aDiv);
         openDialogs.push(aDiv);
@@ -185,14 +189,13 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
      ****/
     function myInform(a_text) {
 
-        gebi('hgsmodi_bbb').innerHTML = '';
-        gebi('hgsmodi_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog('hgsmodi_aaa');
-        veil.veilOff()
-        gebi('hgsmodi_bbb_ok').onclick = function () {
+        inDiv.querySelector('#hgsmodi_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog(inDiv);
+        veil.veilOff();
+        inDiv.querySelector('#hgsmodi_bbb_ok').onclick = function () {
             inDiv.style.display = 'none';
         };
-        gebi('hgsmodi_bbb_ok').focus();
+        inDiv.querySelector('#hgsmodi_bbb_ok').focus();
     }
     /*
      * The action within the login box is just an OK button
@@ -201,7 +204,6 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
      */
     function myLogin(a_text, action, repeat, user) {
 
-        gebi('hgsmodl_bbb').innerHTML = '';
         gebi('hgsmodl_bbb').innerHTML = '<h1 style=text-align:center;">' + a_text.replace(/\n/gi, "<br>") + '</h1>';
         positionDialog('hgsmodl_aaa');
         if (repeat) {
@@ -226,15 +228,14 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
     function myAlert(a_text) {
 
 
-        gebi('hgsmoda_bbb').innerHTML = '';
-        gebi('hgsmoda_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog('hgsmoda_aaa');
-        gebi('hgsmoda_bbb_ok').onclick = function () {
+        alDiv.querySelector('#hgsmoda_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog(alDiv);
+        alDiv.querySelector('#hgsmoda_bbb_ok').onclick = function () {
             alDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
         };
-        gebi('hgsmoda_bbb_ok').focus();
+        alDiv.querySelector('#hgsmoda_bbb_ok').focus();
         window.onkeydown = handleKeyDown;
         return;
     }/*
@@ -242,9 +243,8 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
      *Progress.
      */
     function myProgress(a_text) {
-        gebi('hgsmodpo_bbb').innerHTML = '';
-        gebi('hgsmodpo_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
-        positionDialog('hgsmodpo_aaa');
+        poDiv.querySelector('#hgsmodpo_bbb').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        positionDialog(poDiv);
         return;
     }
     /*
@@ -257,21 +257,21 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
 
         //a_text = htmlentity(a_text);
 
-        positionDialog('hgsmodc_aaa');
-        gebi('hgsmodc_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
-        gebi('modal_confirm_yes').onclick = function () {
+        positionDialog(cdDiv);
+        cdDiv.querySelector('#hgsmodc_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
+        cdDiv.querySelector('[data-button=yes]').onclick = function () {
             cdDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callYes();
         };
-        gebi('modal_confirm_no').onclick = function () {
+        cdDiv.querySelector('[data-button=no]').onclick = function () {
             cdDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callNo();
         };
-        gebi('modal_confirm_no').focus();
+        cdDiv.querySelector('[data-button=no]').focus();
         vailOnClick('modal_confirm_no');
         window.onkeydown = handleKeyDown;
         return;
@@ -285,16 +285,16 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
     function myPrompt(a_text, defaultValue, callOnEnter) {
         //a_text = htmlentity(a_text);
 
-        positionDialog('hgsmodp_aaa');
-        gebi('hgsmodp_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
-        gebi('hgsmodp_ccc').value = defaultValue;
-        gebi('hgsmodp_ddd').onclick = function () {
+        positionDialog(prDiv);
+        prDiv.querySelector('#hgsmodp_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
+        prDiv.querySelector('#hgsmodp_ccc').value = defaultValue;
+        prDiv.querySelector('#hgsmodp_ddd').onclick = function () {
             prDiv.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callOnEnter(gebi('hgsmodp_ccc').value);
         };
-        gebi('hgsmodp_ccc').focus();
+        prDiv.querySelector('#hgsmodp_ccc').focus();
         vailOnClick('hgsmodp_ccc');
         window.onkeydown = handleKeyDown;
         return;
@@ -308,9 +308,9 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
     function myPromptSelect(a_text, options, callOnSelect) {
         //a_text = htmlentity(a_text);
         var n, i, sel, o0, o1, v, o, d, op, that;
-        positionDialog('hgsmods_aaa');
-        gebi('hgsmods_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
-        sel = gebi('hgsmods_ccc');
+        positionDialog(slDiv);
+        slDiv.querySelector('#hgsmods_bbb').innerHTML = a_text.replace(/\n/gi, "<br>");
+        sel = slDiv.querySelector('#hgsmods_ccc');
         n = sel.options.length;
         for (i = 0; i < n; i++) {
             sel.options.remove(0);
@@ -339,14 +339,14 @@ border-radius:4px 4px 4px 4px" class=c' + t + '>' + action.text + '</span>');
             sel.options.add(op);
         }
         sel.selectedIndex = 0;
-        gebi('hgsmods_ddd').onclick = function () {
+        slDiv.querySelector('#hgsmods_ddd').onclick = function () {
             slDiv.style.display = 'none';
             veil.veilOff();
-            that = gebi('hgsmods_ccc');
+            that = slDiv.querySelector('#hgsmods_ccc');
             window.onkeydown = keyDown;
             callOnSelect(that.options[that.selectedIndex]);
         };
-        gebi('hgsmods_ccc').focus();
+        slDiv.querySelector('#hgsmods_ccc').focus();
         vailOnClick('hgsmods_ccc');
         return;
     }
