@@ -74,13 +74,11 @@ function myDialogs() {
                 ''].join('');
     /*
      */
-    if (document.querySelector(".divClass") === null) {
-        divClass = document.createElement('style');
-        divClass.type = 'text/css';
-        divClass.innerHTML = '.divClass' + t + '{box-shadow: 9px 9px 28px 0px gray; width:auto;background:#dbd9e0; border: 0px solid blue;' +
-                'padding:8px; }';
-        document.getElementsByTagName('head')[0].appendChild(divClass);
-    }
+    divClass = document.createElement('style');
+    divClass.type = 'text/css';
+    divClass.innerHTML = '.divClass' + t + '{box-shadow: 9px 9px 28px 0px gray; width:auto;background-color:#f3f3f3; border: 0px solid blue;' +
+            'padding:8px; }';
+    document.getElementsByTagName('head')[0].appendChild(divClass);
 
 
     alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
@@ -91,6 +89,9 @@ function myDialogs() {
     loDiv = createDialogBox('hgsmodl_aaa', loginDialog);
     poDiv = createDialogBox('hgsmodpo_aaa', progressDialog);
     gdDiv = createDialogBox('hgsmodgd', generalDialog);
+
+
+
     /*
      ************************************************
      * functions below
@@ -124,19 +125,22 @@ function myDialogs() {
         document.body.appendChild(aDiv);
         aDiv.draggable = true;
         aDiv.style.draggable = true;
-        aDiv.addEventListener("dragend", function (event) {
-            event.target.style.position = "absolute";
-            to = event.target.offsetTop + (event.screenY - this.hgsY);
-            le = event.target.offsetLeft + (event.screenX - this.hgsX);
-            event.target.style.top = to + 'px';
-            event.target.style.left = le + 'px';
-        }, false);
-        aDiv.addEventListener("dragstart", function (event) {
-            //save current screen position;
-            this.hgsX = event.screenX;
-            this.hgsY = event.screenY;
-        }, false);
+        aDiv.addEventListener("dragend", dragEnd, false);
+        aDiv.addEventListener("dragstart", dragStart, false);
         return aDiv;
+    }
+    function dragEnd(event) {
+        var to, le;
+        event.target.style.position = "fixed";
+        to = event.target.offsetTop + (event.screenY - this.hgsY);
+        le = event.target.offsetLeft + (event.screenX - this.hgsX);
+        event.target.style.top = to + 'px';
+        event.target.style.left = le + 'px';
+    }
+    function dragStart(event) {
+        //save current screen position;
+        this.hgsX = event.screenX;
+        this.hgsY = event.screenY;
     }
 
     function dialogsClean() {
@@ -156,7 +160,7 @@ function myDialogs() {
         } else {
             aDiv = id;
         }
-        aDiv.style.display = 'block';
+        aDiv.style.display = 'inline-block';
         veil.veilSnapToCenter(aDiv);
         openDialogs.push(aDiv);
     }
