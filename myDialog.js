@@ -1,85 +1,106 @@
 function myDialogs() {
     'use strict';
     var
-            veil = myVeil(),
+            veil,
             openDialogs = [],
             keyDown = window.onkyedown,
             divClass, // will hold a css class
-            d = new Date(),
-            t = d.getTime(),
+            d, t,
             gdDiv, // div for confirm dialog to hold the HTML below
-            generalDialog = ['<div style="text-align:center">',
-                '<span  id="hgsgdText">you should never see this</span><p>',
-                '<div  id=hgsgdActions style="text-align:center">',
-                '</div>',
-                '</div>'].join(''),
+            generalDialog,
             cdDiv, // div for confirm dialog to hold the HTML below
-            confirmDialog = ['<div   ><div class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
-                '<div style="text-align:center">',
-                '<button data-button=yes tabindex=1 >Yes</button>',
-                '<button data-button=no  tabindex=2 >No</button>',
-                '</div>',
-                '</div>'].join(''),
+            confirmDialog,
             alDiv, //div for alert box to hold HTML below
-            alertDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center" >',
-                '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button>',
-                '</div>',
-                ''].join(''),
+            alertDialog,
             prDiv, //div for prompt by eenter box to hold HTML below
-            promptDialog = ['<div   style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center">',
-                '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
-                '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
-                '</div>'].join(''),
+            promptDialog,
             slDiv, //div for prompt by select box to hold HTML below
-            selectDialog = ['<div><div class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center">',
-                '<select id=hgsmods_ccc  size=1></select></div><hr>',
-                '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
-                '</div>'].join(''),
+            selectDialog,
             inDiv, //div for alert box to hold HTML below
-            informDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmodi_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center" >',
-                '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>',
-                '</div>',
-                ''].join(''),
+            informDialog,
             poDiv, //div for alert box to hold HTML below
-            progressDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmodpo_bbb"> you should never see this </span><hr>',
-                '<div style="text-align:center" >', '</div>',
-                ''].join(''),
+            progressDialog,
             loDiv, //div for login box to hold HTML below
-            loginDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
-                '<hr>',
-                '<span  id="hgsmodl_bbb" style="text-align:center;"> you should never see this </span><hr><br>',
-                '<div style="text-align:left"><p>',
-                '<form id=logon name=logonf  method=post>',
-                '<b>User:</b> <input tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
-                '<b>Password:</b> <input tabindex=1  name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
-                '<p id=passwd2hide style="display:none"><b>Repeat Password:</b> <input id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
-                '<hr><p style="text-align:center;" ><input type=submit value=Anmelden id="hgsmodl_bbb_ok" tabindex=1 ></form>',
-                '</div>',
-                ''].join('');
-    /*
-     */
+            loginDialog;
+
+
+            
+    veil = myVeil();
+    openDialogs = [];
+    keyDown = window.onkyedown;
+    d = new Date();
+    t = d.getTime();
+
+    generalDialog = ['<div style="text-align:center">',
+        '<span  id="hgsgdText">you should never see this</span><p>',
+        '<div  id=hgsgdActions style="text-align:center">',
+        '</div>',
+        '</div>'].join('');
+
+    confirmDialog = ['<div   ><div class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmodc_bbb">you should never see this</span><hr>',
+        '<div style="text-align:center">',
+        '<button data-button=yes tabindex=1 >Yes</button>',
+        '<button data-button=no  tabindex=2 >No</button>',
+        '</div>',
+        '</div>'].join('');
+
+    alertDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmoda_bbb"> you should never see this </span><hr>',
+        '<div style="text-align:center" >',
+        '<button  id="hgsmoda_bbb_ok" tabindex=1 >OK</button>',
+        '</div>',
+        ''].join('');
+    promptDialog = ['<div   style="text-align:center"><div  class=moveHandle >&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmodp_bbb"> you should never see this </span><hr>',
+        '<div style="text-align:center">',
+        '<input id=hgsmodp_ccc type=text size=40 maxlength=40></div>',
+        '<div id=hgsmodp_ddd  style="text-align:center"><button  tabindex=1 >OK</button>',
+        '</div>'].join('');
+    selectDialog = ['<div><div class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmods_bbb"> you should never see this </span><hr>',
+        '<div style="text-align:center">',
+        '<select id=hgsmods_ccc  size=1></select></div><hr>',
+        '<div style="text-align:center"><br><button id=hgsmods_ddd  tabindex=1 >OK</button>',
+        '</div>'].join('');
+    informDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmodi_bbb"> you should never see this </span><hr>',
+        '<div style="text-align:center" >',
+        '<button  id="hgsmodi_bbb_ok" tabindex=1 >OK</button>',
+        '</div>',
+        ''].join('');
+    progressDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmodpo_bbb"> you should never see this </span><hr>',
+        '<div style="text-align:center" >', '</div>',
+        ''].join('');
+    loginDialog = ['<div><div  class=moveHandle>&nbsp;</div>',
+        '<hr>',
+        '<span  id="hgsmodl_bbb" style="text-align:center;"> you should never see this </span><hr><br>',
+        '<div style="text-align:left"><p>',
+        '<form id=logon name=logonf  method=post>',
+        '<b>User:</b> <input tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
+        '<b>Password:</b> <input tabindex=1  name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
+        '<p id=passwd2hide style="display:none"><b>Repeat Password:</b> <input id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
+        '<hr><p style="text-align:center;" ><input type=submit value=Anmelden id="hgsmodl_bbb_ok" tabindex=1 ></form>',
+        '</div>',
+        ''].join('');
+
+
+    //************************************************
+    // create unique className
+    //************************************************
+
     divClass = document.createElement('style');
     divClass.type = 'text/css';
     divClass.innerHTML = '.divClass' + t + '{box-shadow: 9px 9px 28px 0px gray; width:auto;background-color:#f3f3f3; border: 0px solid blue;' +
             'padding:8px; }';
     document.getElementsByTagName('head')[0].appendChild(divClass);
-
 
     alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
     cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog);
@@ -89,8 +110,6 @@ function myDialogs() {
     loDiv = createDialogBox('hgsmodl_aaa', loginDialog);
     poDiv = createDialogBox('hgsmodpo_aaa', progressDialog);
     gdDiv = createDialogBox('hgsmodgd', generalDialog);
-
-
 
     /*
      ************************************************
