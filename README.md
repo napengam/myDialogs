@@ -12,4 +12,4 @@ The module myDialogs consumes
     * myVeil.js ;disable any interaction with web page if dialog is 'modal'
     * makeDraggable.js ; make dialogs draggable, should also work on touch devices
 
-The above mdoules can also be used stand alone, for documentation look into the sources
+The above modules can also be used stand alone, for documentation look into the sources
