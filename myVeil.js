@@ -1,11 +1,21 @@
-/*
- * create a veil to block any interaction with page elements.
- * A div is created that covers the entire inner  browser window
- * in order to prevent any mouse events on  page elements
- */
+
+//************************************************
+//  create a veil to block any interaction with page elements.
+// A div is created that covers the entire inner  browser window
+// in order to prevent any mouse events on  page elements
+//************************************************
 
 function myVeil() {
-    var veil = null, state = 'off', objectOnTop = null;
+    var veil = null, state = 'off', snapObj = null, reveal = null;
+    veil = document.getElementById('veilVeil');
+
+    //************************************************
+    // do we already exist ?
+    //************************************************
+
+    if (veil) {
+        return veil.selfFunctions;
+    }
     //************************************************
     // create the div 
     //************************************************
@@ -18,7 +28,7 @@ function myVeil() {
         veil.style.zIndex = -1;
         veil.style.background = 'rgba(255, 255, 255, 0.18)';
         veil.style.visibility = 'hidden';
-        veil.style.display = 'none';
+        veil.style.display = 'nones';
         veil.style.position = 'fixed';
         veil.style.top = '0px';
         veil.style.left = '0px';
@@ -32,10 +42,6 @@ function myVeil() {
         //************************************************
         // turn on
         //************************************************
-        if (objectOnTop !== null) {
-            objectOnTop.style.display = 'none';
-            objectOnTop = null;
-        }
         veil.style.visibility = 'visible';
         veil.style.display = 'block';
         veil.style.height = window.innerHeight + 'px';
@@ -48,13 +54,13 @@ function myVeil() {
         //************************************************
         // turn off
         //************************************************
-
         veil.style.visibility = 'hidden';
         veil.style.display = 'none';
         veil.style.height = window.innerHeight + 'px';
         veil.style.zIndex = -1;
         state = 'off';
         window.removeEventListener('resize', trackInnerHeight, false);
+        snapObj = null;
     }
     function veilSnapToCenter(obj) {
         //************************************************
@@ -70,11 +76,12 @@ function myVeil() {
         ww = veil.style.height = window.innerWidth;
         wh = veil.style.height = window.innerHeight;
         obj.style.position = 'fixed';
+        obj.style.top = 0;
+        obj.style.left = 0;
         obj.style.top = (wh / 2 - oh / 2) + 'px';
         obj.style.left = (ww / 2 - ow / 2) + 'px';
         obj.style.zIndex = veil.style.zIndex + 1;
-        obj.style.display = 'inline-block';
-        objectOnTop = obj;
+        snapObj = obj;
 
     }
     //
@@ -85,15 +92,13 @@ function myVeil() {
     function trackInnerHeight() {
         if (state === 'on') {
             veil.style.height = window.innerHeight + 'px';
-            if (objectOnTop) {
-                veilSnapToCenter(objectOnTop);
-            }
         }
+        veilSnapToCenter(snapObj);
     }
     window.onfocus = function (e) {
         var h = e;
     };
-    return {
+    reveal = {
         veil: function () {// expose the veil object 
             return veil;
         }(),
@@ -101,6 +106,8 @@ function myVeil() {
         veilOff: veilOff, //()
         veilSnapToCenter: veilSnapToCenter //(obj)
     };
+    veil.selfFunctions = reveal;
+    return reveal;
 }
 
 
