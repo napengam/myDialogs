@@ -378,7 +378,7 @@ function myDialogs() {
     //********************************************
     //  this makes it a singleton
     //*******************************************
-
+ 
     if (document.querySelector(".divClassDialog4711") === null) {
         reveal = init();
         document.getElementById('alertDialog').self = reveal;
