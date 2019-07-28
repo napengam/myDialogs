@@ -47,11 +47,8 @@ The latest version can allways be found at http://hgsweb.de
 
         <script type="text/javascript">
             theDialogs = myDialogs();
-            theDialogs = myDialogs();
+            //theDialogs = myDialogs(); // test if created only once 
             
-            
-
-
             function callYes() {
                 document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';
             }
