@@ -17,7 +17,8 @@ The latest version can allways be found at http://hgsweb.de
         <title>Alert and Confirm</title>
         <meta charset="UTF-8">
 
-        <script src="myDialogs.js"></script>
+        <script src="myDialogs.js"></script>   
+        <script src="makeDraggable.js"></script>
         <script src="myVeil.js"></script>
 
     </head>

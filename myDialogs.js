@@ -7,14 +7,6 @@ function myDialogs() {
             divClass, // will hold a css class
             d = new Date(),
             t = d.getTime(),
-            gdDiv, // div for confirm dialog to hold the HTML below
-            cdDiv, // div for confirm dialog to hold the HTML below
-            alDiv, //div for alert box to hold HTML below
-            prDiv, //div for prompt by eenter box to hold HTML below
-            slDiv, //div for prompt by select box to hold HTML below
-            inDiv, //div for alert box to hold HTML below
-            loDiv, //div for login box to hold HTML below
-            poDiv, //div for alert box to hold HTML below
             allDialogsHTML = {
                 generalDialog: ['<div style="text-align:center">',
                     '<span class=gagaText>you should never see this</span><p>',
@@ -79,28 +71,13 @@ function myDialogs() {
     ;
 
 
-    if (document.querySelector(".divClass") === null) {
-        divClass = document.createElement('style');
-        divClass.type = 'text/css';
-        divClass.innerHTML = '.divClass' + t + '{width:auto;background:white; border: 1px solid silver;' +
-                'padding:8px; }';
-        document.getElementsByTagName('head')[0].appendChild(divClass);
+    if (document.querySelector(".divClassDialog4711") === null) {
+        makeStyle(t);
     }
 
     for (dialogs in allDialogsHTML) {
         dialogArray[dialogs] = createDialogBox(dialogs, allDialogsHTML[dialogs]);
     }
-
-
-
-//    alDiv = createDialogBox('hgsmoda_aaa', alertDialog);
-//    cdDiv = createDialogBox('hgsmodc_aaa', confirmDialog);
-//    prDiv = createDialogBox('hgsmodp_aaa', promptDialog);
-//    slDiv = createDialogBox('hgsmods_aaa', selectDialog);
-//    inDiv = createDialogBox('hgsmodi_aaa', informDialog);
-//    loDiv = createDialogBox('hgsmodl_aaa', loginDialog);
-//    poDiv = createDialogBox('hgsmodpo_aaa', progressDialog);
-//    gdDiv = createDialogBox('hgsmodgd', generalDialog);
     //*
     // ************************************************
     // * functions below
@@ -115,9 +92,7 @@ function myDialogs() {
         veil.onclick = dialogsClean;
     }
     function createDialogBox(id, HTML) {
-        var to, le, aDiv;
-
-
+        var aDiv;
         aDiv = document.getElementById(id);
         if (aDiv) {
             return aDiv;
@@ -125,27 +100,17 @@ function myDialogs() {
         aDiv = document.createElement('DIV');
         aDiv.id = id;
         aDiv.style.display = 'none';
-        aDiv.className = 'divClass' + t;
-        // aDiv.style.zIndex = 22;
+        aDiv.className = 'divClassDialog4711';
         aDiv.style.position = 'fixed';
         aDiv.style.transition = ' all 0.5s ease-out';
-        aDiv.innerHTML = HTML;
+        aDiv.innerHTML = [
+            "<div class='dialogDrag4711' title='drag me'>",
+            "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
+            "<span class='dialogClose4711' title='Close Dialog' data-dialog='", id, "' >X</span></div>",
+            HTML].join('');
         document.body.appendChild(aDiv);
-        aDiv.draggable = true;
-        aDiv.style.draggable = true;
-        aDiv.addEventListener("dragend", function (event) {
-            event.target.style.position = "fixed";
-            to = event.target.offsetTop + (event.screenY - this.hgsY);
-            le = event.target.offsetLeft + (event.screenX - this.hgsX);
-            event.target.style.top = to + 'px';
-            event.target.style.left = le + 'px';
-        }, false);
-        aDiv.addEventListener("dragstart", function (event) {
-            //save current screen position;
-            this.hgsX = event.screenX;
-            this.hgsY = event.screenY;
-            event.dataTransfer.setData('text/plain', '');
-        }, false);
+        makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
+        aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
         return aDiv;
     }
 
@@ -161,7 +126,6 @@ function myDialogs() {
         var aDiv;
         dialogsClean();
         veil.veilOn();
-        //  aDiv = gebi(id);
         aDiv.style.display = 'block';
         veil.veilSnapToCenter(aDiv);
         openDialogs.push(aDiv);
@@ -185,7 +149,7 @@ function myDialogs() {
         [].forEach.call(elem, function (sp) {
             sp.addEventListener('click', cfg.actions.shift().func, false);
         });
-        return gdDiv;
+        return obj;
     }
 
     ///****
@@ -383,6 +347,20 @@ function myDialogs() {
         value = value.replace(/"/gi, "&quot;");
         value = value.replace(/'/gi, "&#039;");
         return value;
+    }
+    function makeStyle() {
+        var styleElem = document.createElement('STYLE');
+        styleElem.innerHTML = [
+            ".divClassDialog4711{width:auto;background:white; border: 1px solid silver;padding:8px; }",
+            ".dialogDrag4711{ background-color:#ececec;text-align:right;display:inline-block;width:100%;border-bottom:1px solid black }",
+            ".dialogDrag4711:hover{ cursor:move;background-color:lightgray;}",
+            ".dialogClose4711{ font-weight:bold;font-size:1.2em; background-color:white;color:red;padding-left:4px;padding-right:4px;}",
+            ".dialogClose4711:hover{cursor:default;color:white;background-color:red;}",
+            ".dialogMini4711{ font-weight:bold;font-size:1.2em; background-color:white;color:red;padding-left:4px;padding-right:4px;}",
+            ".dialogMini4711:hover{cursor:default;color:white;background-color:red;}"
+        ].join('');
+        document.getElementsByTagName('head')[0].appendChild(styleElem);
+        return styleElem;
     }
     /*
      * Here we  reveal the dialogs/functions to the caller
