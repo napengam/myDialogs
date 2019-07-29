@@ -5,10 +5,10 @@ function makeDraggable(options) {
         'dragHandle': null, //  handle inside drag object 
         'allowY': true, // allow dragging allong Y-axis
         'allowX': true, // allow dragging allong X-axis
-        'xmin': '',
-        'xmax': '',
-        'ymin': '',
-        'ymax': ''
+        'xmin': 0,
+        'xmax': window.innerWidth,
+        'ymin': 0,
+        'ymax': window.innerHeight
     };
     //******************
     // merge caller options 
@@ -85,21 +85,30 @@ function makeDraggable(options) {
         var newPos, min, max;
         if (event.type === 'dragend') {
             if (this.dragOption.allowY) {
+
                 newPos = event.target.offsetTop + (event.screenY - this.hgsY);
                 this.dragOption.ymin === '' ? min = newPos : min = parseInt(this.dragOption.ymin, 10);
-                this.dragOption.ymax === '' ? max = newPos : max = parseInt(this.dragOption.ymax, 10);
+                this.dragOption.ymax === '' ? max = newPos : max = parseInt(this.dragOption.ymax - this.clientHeight-4, 10);
 
                 if (min <= newPos && newPos <= max) {
                     this.style.top = newPos + 'px';
+                } else if (newPos < min) {
+                    this.style.top = min + 'px';
+                } else if (newPos > max) {
+                    this.style.top = max + 'px';
                 }
             }
             if (this.dragOption.allowX) {
                 newPos = event.target.offsetLeft + (event.screenX - this.hgsX);
                 this.dragOption.xmin === '' ? min = newPos : min = parseInt(this.dragOption.xmin, 10);
-                this.dragOption.xmax === '' ? max = newPos : max = parseInt(this.dragOption.xmax, 10);
+                this.dragOption.xmax === '' ? max = newPos : max = parseInt(this.dragOption.xmax - this.clientWidth-4, 10);
 
                 if (min <= newPos && newPos <= max) {
                     this.style.left = newPos + 'px';
+                } else if (newPos < min) {
+                    this.style.left = min + 'px';
+                } else if (newPos > max) {
+                    this.style.left = max + 'px';
                 }
 
             }
