@@ -17,7 +17,7 @@ The latest version can allways be found at http://hgsweb.de
         <title>Alert and Confirm</title>
         <meta charset="UTF-8">
 
-        <script src="myDialogs.js"></script>   
+        <script src="myDialogs_1.js"></script>   
         <script src="makeDraggable.js"></script>
         <script src="myVeil.js"></script>
 
@@ -47,8 +47,8 @@ The latest version can allways be found at http://hgsweb.de
 
         <script type="text/javascript">
             theDialogs = myDialogs();
-            //theDialogs = myDialogs(); // test if created only once 
-            
+            theDialogs = myDialogs(); // test if created only once 
+
             function callYes() {
                 document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';
             }
