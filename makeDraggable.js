@@ -35,6 +35,8 @@ function makeDraggable(options) {
     //*****************
     // turn dragabble on / off
     //******************/
+    handle.removeEventListener("mouseout", out, false);
+    handle.removeEventListener("mouseover", over, false);
     handle.addEventListener("mouseout", out, false);
     handle.addEventListener("mouseover", over, false);
 
@@ -88,7 +90,7 @@ function makeDraggable(options) {
 
                 newPos = event.target.offsetTop + (event.screenY - this.hgsY);
                 this.dragOption.ymin === '' ? min = newPos : min = parseInt(this.dragOption.ymin, 10);
-                this.dragOption.ymax === '' ? max = newPos : max = parseInt(this.dragOption.ymax - this.clientHeight-4, 10);
+                this.dragOption.ymax === '' ? max = newPos : max = parseInt(this.dragOption.ymax - this.clientHeight - 4, 10);
 
                 if (min <= newPos && newPos <= max) {
                     this.style.top = newPos + 'px';
@@ -101,7 +103,7 @@ function makeDraggable(options) {
             if (this.dragOption.allowX) {
                 newPos = event.target.offsetLeft + (event.screenX - this.hgsX);
                 this.dragOption.xmin === '' ? min = newPos : min = parseInt(this.dragOption.xmin, 10);
-                this.dragOption.xmax === '' ? max = newPos : max = parseInt(this.dragOption.xmax - this.clientWidth-4, 10);
+                this.dragOption.xmax === '' ? max = newPos : max = parseInt(this.dragOption.xmax - this.clientWidth - 4, 10);
 
                 if (min <= newPos && newPos <= max) {
                     this.style.left = newPos + 'px';
