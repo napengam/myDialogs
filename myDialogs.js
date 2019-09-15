@@ -70,6 +70,9 @@ function myDialogs() {
     ;
 
     if (document.querySelector(".divClassDialog4711") !== null) {
+        //********************************************
+        //  we allready exist
+        //*******************************************
         return document.getElementById('alertDialog').self;
     }
     //
@@ -279,18 +282,17 @@ function myDialogs() {
         for (i = 0; i < n; i++) {
             sel.options.remove(0);
         }
+
         o0 = options.split(',');
         n = o0.length;
         for (i = 0; i < n; i++) {
             o1 = o0[i].split('|');
-            if (o1.length === 0) {
-                v = o = d = '';
-            } else if (o1.length === 1) {
+            v = o = d = '';
+            if (o1.length === 1) {
                 v = o = d = o1[0];
             } else if (o1.length === 2) {
                 v = o1[0];
-                o = o1[1];
-                d = o1[1];
+                o = d = o1[1];
             } else if (o1.length === 3) {
                 v = o1[0];
                 o = o1[1];
