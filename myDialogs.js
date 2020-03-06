@@ -6,55 +6,50 @@ function myDialogs() {
             keyDown = window.onkyedown,
             d = new Date(),
             t = d.getTime(),
-            divScroll = '<div class="gagaText" style="overflow-y:auto;max-width: 600px;max-height: 400px;overflow-x: auto;white-space: pre;">> you should never see this </div><hr>',
+            divScroll = [
+                '<hr style="clear:both">',
+                '<div class="gagaText" style="text-align:center;overflow-y:auto;max-width: 600px;max-height: 400px;overflow-x: auto;white-space: pre;"> you should never see this </div>',
+                '<hr>'
+            ].join(''),
             allDialogsHTML = {
-                generalDialog: ['<div style="text-align:center">',
-                    '<span class=gagaText>you should never see this</span><p>',
+                generalDialog: [
+                    divScroll, '<p>',
                     '<div  class=gagaAction style="text-align:center">',
-                    '</div>',
                     '</div>'].join(''),
-                confirmDialog: ['<div  id="hgsmodc_veil" >',
-                    '<hr style="clear:both">',
+                confirmDialog: [
                     divScroll,
                     '<div style="text-align:center">',
                     '<button class="gagaButtonYes" tabindex=1 >Yes</button>&nbsp;',
                     '<button class="gagaButtonNo" tabindex=2 >No</button>',
-                    '</div>',
                     '</div>'].join(''),
-                alertDialog: ['<div  id="hgsmoda_veil">',
-                    '<hr style="clear:both">',
-                    divScroll,
-                    '<div style="text-align:center" >',
-                    '<button  class=gagaButton tabindex=1 >OK</button>',
-                    '</div>',
-                    ''].join(''),
-                promptDialog: ['<div  id="hgsmodp_veil" style="text-align:center">',
-                    '<hr style="clear:both">',
+                alertDialog: [
                     divScroll,
                     '<div style="text-align:center">',
-                    '<input class="gagaInput" type=text size=40 maxlength=40></div>',
+                    '<button  class=gagaButton tabindex=1 >OK</button>',
+                    '</div>'].join(''),
+                promptDialog: [
+                    divScroll,
+                    '<div style="text-align:center">',
+                    '<input class="gagaInput" type=text size=40 maxlength=40>',
+                    '</div>',
                     '<div id=hgsmodp_ddd  style="text-align:center"><button class="gagaButton" tabindex=1 >OK</button>',
                     '</div>'].join(''),
-                selectDialog: ['<div  id="hgsmods_veil">',
-                    '<hr style="clear:both">',
+                selectDialog: [
                     divScroll,
                     '<div style="text-align:center">',
-                    '<select class="gagaSelect"  size=1></select></div><hr>',
-                    '<div style="text-align:center"><br><button class="gagaButton" tabindex=1 >OK</button>',
+                    '<select class="gagaSelect"  size=1></select>',
+                    '</div><hr>',
+                    '<div style="text-align:center"><br>',
+                    '<button class="gagaButton" tabindex=1 >OK</button>',
                     '</div>'].join(''),
-                informDialog: ['<div  id="hgsmodi_veil">',
-                    '<hr style="clear:both">',
+                informDialog: [
                     divScroll,
-                    '<div style="text-align:center" >',
+                    '<div style="text-align:center">',
                     '<button  class="gagaButton" tabindex=1 >OK</button>',
-                    '</div>',
-                    ''].join(''),
-                progressDialog: ['<div  id="hgsmodpo_veil">',
-                    '<hr style="clear:both">',
-                    divScroll,
-                    '<div style="text-align:center" >', '</div>',
-                    ''].join(''),
-                loginDialog: ['<div  id="hgsmodl_veil">',
+                    '</div>'].join(''),
+                progressDialog: [
+                    divScroll].join(''),
+                loginDialog: [
                     '<hr>',
                     '<span class=gagaText style="text-align:center"> you should never see this </span><hr><br>',
                     '<div style="text-align:left"><p>',
@@ -62,9 +57,7 @@ function myDialogs() {
                     '<b>User:</b> <input class="gagaUser" tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
                     '<b>Password:</b> <input tabindex=1  class="gagaPasswd" name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
                     '<p class=gagaPasswd2hide style="display:none"><b>Repeat Password:</b> <input class="gagaPasswd2" id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
-                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>',
-                    '</div>',
-                    ''].join('')
+                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>'].join('')
             },
             dialogs,
             dialogArray = [];
@@ -100,7 +93,7 @@ function myDialogs() {
         aDiv.style.display = 'none';
         aDiv.className = 'divClassDialog4711';
         aDiv.style.position = 'fixed';
-        aDiv.style.transition = ' all 0.5s ease-out';
+        aDiv.style.transition = ' all 0.2s ease-out';
         aDiv.innerHTML = [
             "<div class='dialogDrag4711' title='drag me'>",
             "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
