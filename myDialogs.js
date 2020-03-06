@@ -57,7 +57,8 @@ function myDialogs() {
                     '<b>User:</b> <input class="gagaUser" tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
                     '<b>Password:</b> <input tabindex=1  class="gagaPasswd" name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
                     '<p class=gagaPasswd2hide style="display:none"><b>Repeat Password:</b> <input class="gagaPasswd2" id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
-                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>'].join('')
+                    '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>'
+                ].join('')
             },
             dialogs,
             dialogArray = [];
@@ -96,8 +97,8 @@ function myDialogs() {
         aDiv.style.transition = ' all 0.2s ease-out';
         aDiv.innerHTML = [
             "<div class='dialogDrag4711' title='drag me'>",
-            "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
-            "<span class='dialogClose4711' title='Close Dialog' data-dialog='", id, "' >X</span></div>",
+            "<span class='dialogMini4711' style='display:none;' title='minimiere Dialog'>_</span>&nbsp;",
+            "<span class='dialogClose4711' title='Close Dialog' >X</span></div>",
             HTML].join('');
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
