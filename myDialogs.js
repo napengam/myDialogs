@@ -79,10 +79,6 @@ function myDialogs() {
     function gebi(id) {
         return document.getElementById(id);
     }
-
-    function vailOnClick() {
-        veil.onclick = dialogsClean;
-    }
     function createDialogBox(id, HTML) {
         var aDiv;
         aDiv = document.getElementById(id);
@@ -97,7 +93,7 @@ function myDialogs() {
         aDiv.style.transition = ' all 0.2s ease-out';
         aDiv.innerHTML = [
             "<div class='dialogDrag4711' title='drag me'>",
-            "<span class='dialogMini4711' style='display:none;' title='minimiere Dialog'>_</span>&nbsp;",
+            "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
             "<span class='dialogClose4711' title='Close Dialog' >X</span></div>",
             HTML].join('');
         document.body.appendChild(aDiv);
@@ -234,7 +230,7 @@ function myDialogs() {
             callNo();
         };
         obj.querySelector('.gagaButtonNo').focus();
-        vailOnClick('modal_confirm_no');
+
         window.onkeydown = handleKeyDown;
         return;
     }
@@ -257,7 +253,7 @@ function myDialogs() {
             callOnEnter(obj.querySelector('.gagaInput').value);
         };
         obj.querySelector('.gagaButton').focus();
-        vailOnClick('hgsmodp_ccc');
+
         window.onkeydown = handleKeyDown;
         return;
     }
@@ -277,7 +273,6 @@ function myDialogs() {
         for (i = 0; i < n; i++) {
             sel.options.remove(0);
         }
-
         o0 = options.split(',');
         n = o0.length;
         for (i = 0; i < n; i++) {
@@ -307,7 +302,7 @@ function myDialogs() {
             callOnSelect(sel.options[sel.selectedIndex]);
         };
         obj.querySelector('.gagaButton').focus();
-        vailOnClick('hgsmods_ccc');
+
         return;
     }
     function handleKeyDown(e) {
