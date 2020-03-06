@@ -31,7 +31,15 @@ The latest version can allways be found at http://hgsweb.de
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
                 <input type=text siye=20>
-                <button  onclick='theDialogs.myInform("<h1>The Information Box!<br>Not modal")'>Just show some information</button>
+                <button  onclick='theDialogs.myInform("<h1>The Information Box!\n\
+The Information Box!The Information Box!\n\
+The Information Box!The Information Box!The Information Box!\n\
+The InfThe Information Box!The Information Box!\n\
+The Information Box!The Information Box!The Information Box!\n\
+The InfThe Information Box!The Information Box!\n\
+The Information Box!The Information Box!The Information Box!\n\
+The Information Box!The Information Box!The Information Box!The Information Box!\n\
+The Information Box!The Information Box!<br>Not modal")'>Just show some information</button>
                 <button  onclick='theDialogs.myLogin("Please Log In")'>Login Dialog</button>
                 <button  onclick='theDialogs.myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
                 <button  onclick='theDialogs.myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
