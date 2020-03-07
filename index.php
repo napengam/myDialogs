@@ -31,7 +31,7 @@ The latest version can allways be found at http://hgsweb.de
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
                 <input type=text siye=20>
-                <button  onclick='theDialogs.myInform("<h1>The Information Box!\n\
+                <button  onclick='theDialogs.myInform("<h1>The Information Box! Not modal \n\
 The Information Box!The Information Box!\n\
 The Information Box!The Information Box!The Information Box!\n\
 The InfThe Information Box!The Information Box!\n\

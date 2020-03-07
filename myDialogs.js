@@ -307,10 +307,6 @@ function myDialogs() {
     }
     function handleKeyDown(e) {
         var keyCode = e.keyCode || e.which;
-        if ([9, 13, 32, 27].indexOf(keyCode) === -1) {
-            // Don't do work on keys we don't care about.
-            return;
-        }
         if (keyCode === 9) {
             if (e.target.id === 'user') {
                 gebi('pass').focus();
@@ -330,7 +326,6 @@ function myDialogs() {
     function makeStyle() {
         var styleElem = document.createElement('STYLE');
         styleElem.innerHTML = [
-
             ".divClassDialog4711{background:white; border: 1px solid silver;padding:8px; }",
             ".dialogDrag4711{ background-color:#ececec;text-align:right;display:inline-block;width:100%;border-bottom:1px solid black }",
             ".dialogDrag4711:hover{ cursor:move;background-color:lightgray;}",
