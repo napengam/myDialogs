@@ -10,21 +10,21 @@ function makeDraggable(options) {
         'ymin': 0,
         'ymax': window.innerHeight
     };
-    //******************
+    //
     // merge caller options 
-    //* with default
-    //******************/
+    // with default
+    //
     opt = Object.assign(defaultOpt, options);
 
-    //******************
+    //
     // locate object to be dragged
-    //***************** /
+    // /
     if (typeof opt.dragObj === 'string') {
         obj = document.getElementById(opt.dragObj);
     } else {
         obj = opt.dragObj;
     }
-    //******************
+    //
     //     locate drag handle
     //    ******************/
     if (typeof opt.dragHandle === 'string') {
@@ -32,20 +32,20 @@ function makeDraggable(options) {
     } else {
         handle = opt.dragHandle;
     }
-    //*****************
+    //
     // turn dragabble on / off
-    //******************/
+    //
     handle.removeEventListener("mouseout", out, false);
     handle.removeEventListener("mouseover", over, false);
     handle.addEventListener("mouseout", out, false);
     handle.addEventListener("mouseover", over, false);
 
-    //******************
+    //
     // save options within drag object
     // and add eventhandlers for dragging 
     // but only once, because you can have more
     // then one drag handle inside drag object
-    //*****************/
+    //
     obj.draggable = false;
     if (typeof obj.dragOption === 'undefined') {
         obj.dragOption = opt;
@@ -55,9 +55,9 @@ function makeDraggable(options) {
         obj.addEventListener("touchmove", touchMove, false);
         obj.addEventListener("touchstart", touchStart, false);
     }
-    //******************
+    //
     // over or out of draghandle
-    //*****************/
+    //
     function over() {
 
         obj.draggable = true;
@@ -66,10 +66,10 @@ function makeDraggable(options) {
 
         obj.draggable = false;
     }
-    //******************
+    //
     // save current position of
     // drag object on screen.
-    //*****************/
+    //
     function dragStart(event) {
         if (event.type === 'dragstart') {
             this.style.position = "fixed";
@@ -79,10 +79,10 @@ function makeDraggable(options) {
         }
     }
 
-    //******************
-    //* compute new position of drag
-    //* object, respect options
-    //******************/
+    //
+    // compute new position of drag
+    // object, respect options
+    //
     function dragEnd(event) {
         var newPos, min, max;
         if (event.type === 'dragend') {
@@ -116,18 +116,18 @@ function makeDraggable(options) {
             }
         }
     }
-    //***********************************************
+    //
     //For touch events. Touch devices do not show
     //an outline image while dragging an object, therefore
     //we reposition the object along the touchpoint movement 
-    //************************************************/
+    //
 
     function touchStart(event) {
-        //******************
+        //
         //need to know if a drag handle is touched.
         //For this we ask for a specific class 
         //in the object being touched. 
-        //******************/
+        //
         if (event.target.classList.contains("dialogDrag4711")) {
             this.style.position = "fixed";
             this.draggable = true;
