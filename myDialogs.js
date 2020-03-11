@@ -12,6 +12,8 @@ function myDialogs() {
                 '<hr>'
             ].join(''),
             allDialogsHTML = {
+                emptyDialog: [divScroll
+                ].join(''),
                 generalDialog: [
                     divScroll, '<p>',
                     '<div  class=gagaAction style="text-align:center">',
