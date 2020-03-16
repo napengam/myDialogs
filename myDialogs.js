@@ -145,13 +145,16 @@ function myDialogs() {
     //***
     //Information dialog
     //**/
-    function myInform(text) {
+    function myInform(text, voff) {
         var obj = dialogArray['informDialog'];
         obj.querySelector('.gagaText').innerHTML = '<b>' + text.replace(/\n/gi, "<br>") + '</b>';
         positionDialog(obj);
-        veil.veilOff();
+        if (typeof voff !== 'undefined') {
+            veil.veilOff();
+        }
         obj.querySelector('.gagaButton').onclick = function () {
             obj.style.display = 'none';
+            veil.veilOff();
         };
         obj.querySelector('.gagaButton').focus();
     }
