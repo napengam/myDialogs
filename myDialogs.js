@@ -101,6 +101,7 @@ function myDialogs() {
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
         aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
+        aDiv.dataset.firstCall = '1';
         return aDiv;
     }
 
@@ -152,11 +153,15 @@ function myDialogs() {
         if (typeof voff !== 'undefined') {
             veil.veilOff();
         }
-        obj.querySelector('.gagaButton').onclick = function () {
+        obj.querySelector('.gagaButton').onclick = click;
+        obj.querySelector('.gagaButton').focus();
+        window.onkeydown = handleKeyDown;
+        function click() {
             obj.style.display = 'none';
             veil.veilOff();
-        };
-        obj.querySelector('.gagaButton').focus();
+            window.onkeydown = keyDown;
+        }
+
     }
     //
     // The action within the login box is just an OK button
@@ -172,13 +177,16 @@ function myDialogs() {
             obj.querySelector('.gagaPasswd2hide').value = user;
         }
         obj.querySelector('.gagaSubmit').form.action = action;
-        obj.querySelector('.gagaSubmit').onclick = function () {
+        obj.querySelector('.gagaSubmit').onclick = click;
+        obj.querySelector('.gagaSubmit').focus();
+        window.onkeydown = handleKeyDown;
+
+        function click() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
-        };
-        obj.querySelector('.gagaSubmit').focus();
-        window.onkeydown = handleKeyDown;
+        }
+        ;
         return;
     }
     //
@@ -192,13 +200,15 @@ function myDialogs() {
         obj = dialogArray['alertDialog'];
         obj.querySelector('.gagaText').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
         positionDialog(obj);
-        obj.querySelector('.gagaButton').onclick = function () {
+        obj.querySelector('.gagaButton').onclick = click;
+        obj.querySelector('.gagaButton').focus();
+        window.onkeydown = handleKeyDown;
+
+        function click() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
-        };
-        obj.querySelector('.gagaButton').focus();
-        window.onkeydown = handleKeyDown;
+        }
         return;
     }
     //
@@ -219,24 +229,28 @@ function myDialogs() {
     //
     function myConfirm(a_text, callYes, callNo) {
         var obj = dialogArray['confirmDialog'];
-
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
-        obj.querySelector('.gagaButtonYes').onclick = function () {
+        if (obj.dataset.firstCall === '1') {
+            obj.dataset.firstCall = '0';
+            obj.querySelector('.gagaButtonYes').onclick = yesClick;
+            obj.querySelector('.gagaButtonNo').onclick = noClick;
+        }
+        obj.querySelector('.gagaButtonNo').focus();
+
+        window.onkeydown = handleKeyDown;
+        function yesClick() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callYes();
-        };
-        obj.querySelector('.gagaButtonNo').onclick = function () {
+        }
+        function noClick() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callNo();
-        };
-        obj.querySelector('.gagaButtonNo').focus();
-
-        window.onkeydown = handleKeyDown;
+        }
         return;
     }
     //
@@ -251,15 +265,17 @@ function myDialogs() {
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
         obj.querySelector('.gagaInput').value = defaultValue;
-        obj.querySelector('.gagaButton').onclick = function () {
+        obj.querySelector('.gagaButton').onclick = click;
+        obj.querySelector('.gagaButton').focus();
+
+        window.onkeydown = handleKeyDown;
+
+        function click() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callOnEnter(obj.querySelector('.gagaInput').value);
-        };
-        obj.querySelector('.gagaButton').focus();
-
-        window.onkeydown = handleKeyDown;
+        }
         return;
     }
     // 
@@ -300,14 +316,15 @@ function myDialogs() {
             sel.options.add(op);
         }
         sel.selectedIndex = 0;
-        obj.querySelector('.gagaButton').onclick = function () {
+        obj.querySelector('.gagaButton').onclick = click;
+        obj.querySelector('.gagaButton').focus();
+
+        function click() {
             obj.style.display = 'none';
             veil.veilOff();
             window.onkeydown = keyDown;
             callOnSelect(sel.options[sel.selectedIndex]);
-        };
-        obj.querySelector('.gagaButton').focus();
-
+        }
         return;
     }
     function handleKeyDown(e) {

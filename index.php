@@ -17,9 +17,7 @@ The latest version can allways be found at http://hgsweb.de
         <title>Alert and Confirm</title>
         <meta charset="UTF-8">
 
-        <script src="myDialogs.js"></script>   
-        <script src="makeDraggable.js"></script>
-        <script src="myVeil.js"></script>
+
 
     </head>
     <body>    
@@ -52,8 +50,10 @@ The Information Box!The Information Box!<br>Not modal")'>Just show some informat
             </div>
             <p> Once a dialog pops up you should no longer be able to press any of the buttons above       
         </div>
-
-        <script type="text/javascript">
+        <script src="myDialogs.js"></script>   
+        <script src="makeDraggable.js"></script>
+        <script src="myVeil.js"></script>
+        <script>
             theDialogs = myDialogs();
             theDialogs = myDialogs(); // test if created only once 
 

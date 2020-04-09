@@ -71,7 +71,7 @@ function makeDraggable(options) {
     // drag object on screen.
     //
     function dragStart(event) {
-        if (event.type === 'dragstart') {
+        if (event.type === 'dragstart' && obj.draggable) {
             this.style.position = "fixed";
             event.dataTransfer.setData('text', ''); // to satisfy FF
             this.hgsX = event.screenX;
@@ -85,7 +85,7 @@ function makeDraggable(options) {
     //
     function dragEnd(event) {
         var newPos, min, max;
-        if (event.type === 'dragend') {
+        if (event.type === 'dragend' && obj.draggable) {
             if (this.dragOption.allowY) {
 
                 newPos = event.target.offsetTop + (event.screenY - this.hgsY);
