@@ -101,7 +101,7 @@ function myDialogs() {
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
         aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
-        aDiv.dataset.firstCall = '1';
+
         return aDiv;
     }
 
@@ -231,11 +231,10 @@ function myDialogs() {
         var obj = dialogArray['confirmDialog'];
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
-        if (obj.dataset.firstCall === '1') {
-            obj.dataset.firstCall = '0';
-            obj.querySelector('.gagaButtonYes').onclick = yesClick;
-            obj.querySelector('.gagaButtonNo').onclick = noClick;
-        }
+
+        obj.querySelector('.gagaButtonYes').onclick = yesClick;
+        obj.querySelector('.gagaButtonNo').onclick = noClick;
+
         obj.querySelector('.gagaButtonNo').focus();
 
         window.onkeydown = handleKeyDown;
