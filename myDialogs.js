@@ -1,5 +1,11 @@
 function myDialogs() {
     'use strict';
+    if (document.querySelector(".divClassDialog4711") !== null) {
+        //********************************************
+        //  we allready exist
+        //*******************************************
+        return document.getElementById('alertDialog').self;
+    }
     var reveal,
             veil = myVeil(),
             openDialogs = [],
@@ -21,8 +27,8 @@ function myDialogs() {
                 confirmDialog: [
                     divScroll,
                     '<div style="text-align:center">',
-                    '<button class="gagaButtonYes" tabindex=1 >Yes</button>&nbsp;',
-                    '<button class="gagaButtonNo" tabindex=2 >No</button>',
+                    '<button class="gagaButtonYes" tabindex=1 >Ja</button>&nbsp;',
+                    '<button class="gagaButtonNo" tabindex=2 >Nein</button>',
                     '</div>'].join(''),
                 alertDialog: [
                     divScroll,
@@ -34,7 +40,7 @@ function myDialogs() {
                     '<div style="text-align:center">',
                     '<input class="gagaInput" type=text size=40 maxlength=40>',
                     '</div>',
-                    '<div id=hgsmodp_ddd  style="text-align:center"><button class="gagaButton" tabindex=1 >OK</button>',
+                    '<br><div id=hgsmodp_ddd  style="text-align:center"><button class="gagaButton" tabindex=1 >Übernehmen</button>',
                     '</div>'].join(''),
                 selectDialog: [
                     divScroll,
@@ -49,15 +55,23 @@ function myDialogs() {
                     '<div style="text-align:center">',
                     '<button  class="gagaButton" tabindex=1 >OK</button>',
                     '</div>'].join(''),
+                resultDialog: [
+                    divScroll,
+                    '<div style="text-align:center">',
+                    '<button  class="gagaButton" tabindex=1 >OK</button>',
+                    '</div>'].join(''),
                 progressDialog: [
-                    divScroll].join(''),
+                    divScroll,
+                    '<div style="text-align:center;display:none">',
+                    '<button  class="gagaButton" tabindex=1 >OK</button>',
+                    '</div>'].join(''),
                 loginDialog: [
                     '<hr>',
                     '<span class=gagaText style="text-align:center"> you should never see this </span><hr><br>',
                     '<div style="text-align:left"><p>',
                     '<form id=logon name=logonf  method=post>',
-                    '<b>User:</b> <input class="gagaUser" tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
-                    '<b>Password:</b> <input tabindex=1  class="gagaPasswd" name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
+                    '<b>Ausweis:</b> <input class="gagaUser" tabindex=1  name=user style="float:right;margin-right:0px;" id=user type=text><p>',
+                    '<b>Passwort:</b> <input tabindex=1  class="gagaPasswd" name=passwd style="float:right;margin-right:0px;" id=pass type=password>',
                     '<p class=gagaPasswd2hide style="display:none"><b>Repeat Password:</b> <input class="gagaPasswd2" id=passwd2id tabindex=1  name=passwd2 style="float:right;margin-right:0px;" type=password>',
                     '<hr><p style="text-align:center;" ><input type=submit value=Anmelden class="gagaSubmit" tabindex=1 ></form>'
                 ].join('')
@@ -66,12 +80,7 @@ function myDialogs() {
             dialogArray = [];
     ;
 
-    if (document.querySelector(".divClassDialog4711") !== null) {
-        //********************************************
-        //  we allready exist
-        //*******************************************
-        return document.getElementById('alertDialog').self;
-    }
+
     //
     //**********************************************
     // functions below
@@ -99,15 +108,24 @@ function myDialogs() {
             "<span class='dialogClose4711' title='Close Dialog' >X</span></div>",
             HTML].join('');
         document.body.appendChild(aDiv);
-        makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711')});
-        aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
-
+        makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711'), cross: 'no'});
+        if (aDiv.id !== 'resultDialog') {
+            aDiv.querySelector('.dialogClose4711').addEventListener('click', dialogsClean, false);
+        } else {
+            aDiv.querySelector('.dialogClose4711').addEventListener('click', () =>
+            {
+                aDiv.querySelector('.gagaText').innerHTML = '';
+                aDiv.style.display = 'none';
+            }, false);
+        }
+        aDiv.dataset.firstCall = '1';
         return aDiv;
     }
 
     function dialogsClean() {
         openDialogs.forEach(function (elem) {
             elem.style.display = 'none';
+
         });
         veil.veilOff();
         openDialogs = [];
@@ -119,7 +137,9 @@ function myDialogs() {
         veil.veilOn();
         aDiv.style.display = 'block';
         veil.veilSnapToCenter(aDiv);
-        openDialogs.push(aDiv);
+        if (aDiv.id !== 'resultDialog') {
+            openDialogs.push(aDiv);
+        }
     }
     //**********************************************
     // most general dialogbox
@@ -142,7 +162,16 @@ function myDialogs() {
         });
         return obj;
     }
-
+    function myEmptyDialog(text, off) {
+        var obj = dialogArray['emptyDialog'],
+                elem = obj.querySelector('.gagaText');
+        elem.innerHTML = text;
+        positionDialog(obj);
+        if (typeof off !== 'undefined') {
+            veil.veilOff();
+        }
+        return obj;
+    }
     //***
     //Information dialog
     //**/
@@ -161,7 +190,26 @@ function myDialogs() {
             veil.veilOff();
             window.onkeydown = keyDown;
         }
-
+        return obj;
+    }
+    //***
+    //result dialog
+    //**/
+    function myResult(text) {
+        var obj = dialogArray['resultDialog'];
+        obj.querySelector('.gagaText').innerHTML = text.replace(/\n/gi, "<br>");
+        positionDialog(obj);
+        veil.veilOff();
+        obj.querySelector('.gagaButton').onclick = click;
+        obj.querySelector('.gagaButton').focus();
+        window.onkeydown = handleKeyDown;
+        function click() {
+            obj.querySelector('.gagaText').innerHTML = '';
+            obj.style.display = 'none';
+            veil.veilOff();
+            window.onkeydown = keyDown;
+        }
+        return obj;
     }
     //
     // The action within the login box is just an OK button
@@ -170,7 +218,7 @@ function myDialogs() {
     //
     function myLogin(a_text, action, repeat, user) {
         var obj = dialogArray['loginDialog'];
-        obj.querySelector('.gagaText').innerHTML = '<h1 style=text-align:center;">' + a_text.replace(/\n/gi, "<br>") + '</h1>';
+        obj.querySelector('.gagaText').innerHTML = '<div style=text-align:center;">' + a_text.replace(/\n/gi, "<br>") + '</div>';
         positionDialog(obj);
         if (repeat) {
             obj.querySelector('.gagaPasswd2hide').style.display = '';
@@ -209,15 +257,21 @@ function myDialogs() {
             veil.veilOff();
             window.onkeydown = keyDown;
         }
-        return;
+        return obj;
     }
     //
     //
     // Progress.
     //
-    function myProgress(a_text) {
-        var obj = dialogArray['progressDialog'];
+    function myProgress(a_text, abort) {
+        var abo, obj = dialogArray['progressDialog'];
         obj.querySelector('.gagaText').innerHTML = '<b>' + a_text.replace(/\n/gi, "<br>") + '</b>';
+        if (typeof abort !== 'undefined' && typeof abort === 'object') {
+            abo = obj.querySelector('.gagaButton');
+            abo.parentNode.style.display = '';
+            abo.innerHTML = abort.text;
+            abo.onclick = abort.func;
+        }
         positionDialog(obj);
         return;
     }
@@ -231,10 +285,8 @@ function myDialogs() {
         var obj = dialogArray['confirmDialog'];
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
-
         obj.querySelector('.gagaButtonYes').onclick = yesClick;
         obj.querySelector('.gagaButtonNo').onclick = noClick;
-
         obj.querySelector('.gagaButtonNo').focus();
 
         window.onkeydown = handleKeyDown;
@@ -365,13 +417,18 @@ function myDialogs() {
     reveal = {
         myDialogBox: myDialogBox, //(text)
         myInform: myInform, //(text)
+        myResult: myResult, //(text)
         myLogin: myLogin, //(text,actionScript,reset)
         myAlert: myAlert, //(text)
         myConfirm: myConfirm, //(text,callYes,callNo)
         myPrompt: myPrompt, //(text,default Value,callOnEnter)
         myProgress: myProgress, //(text)
         myPromptSelect: myPromptSelect, //(text,option-list,callOnSelect),
-        dialogsClean: dialogsClean
+        dialogsClean: dialogsClean,
+        closeDialog: dialogsClean,
+        myEmptyDialog: myEmptyDialog,
+        veilOff: veil.veilOff,
+        veilOn: veil.veilOn
     };
     //********************************************
     //  we create the dialogs here 
