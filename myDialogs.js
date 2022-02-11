@@ -350,13 +350,13 @@ function myDialogs() {
         n = o0.length;
         for (i = 0; i < n; i++) {
             o1 = o0[i].split('|');
-            o1.push('');
-            o1.push('');
+            o1.push('');// have at least 3 items
+            o1.push('');// have at least 3 items
             [v, o, d] = o1;
             op = document.createElement("option");
             op.value = v;
-            op.text = (o);
-            op.title = (d);
+            op.text = o === '' ? o = v : o;
+            op.title = d === '' ? d = o : d;
             sel.options.add(op);
         }
         sel.selectedIndex = 0;
