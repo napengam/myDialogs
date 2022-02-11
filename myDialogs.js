@@ -16,7 +16,12 @@ function myDialogs() {
                 '<hr style="clear:both">',
                 '<div class="gagaText" style="text-align:center;overflow-y:auto;max-width: 600px;max-height: 400px;overflow-x: auto;white-space: pre;"> you should never see this </div>',
                 '<hr>'
-            ].join(''),
+            ].join('')
+            ,
+            dragMe = ["<div class='dialogDrag4711' title='drag me'>",
+                "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
+                "<span class='dialogClose4711' title='Close Dialog' >X</span></div>"].join('')
+            ,
             allDialogsHTML = {
                 emptyDialog: [divScroll
                 ].join(''),
@@ -27,8 +32,8 @@ function myDialogs() {
                 confirmDialog: [
                     divScroll,
                     '<div style="text-align:center">',
-                    '<button class="gagaButtonYes" tabindex=1 >Ja</button>&nbsp;',
-                    '<button class="gagaButtonNo" tabindex=2 >Nein</button>',
+                    '<button class="gagaButtonYes" tabindex=1 >Yes</button>&nbsp;',
+                    '<button class="gagaButtonNo" tabindex=2 >No</button>',
                     '</div>'].join(''),
                 alertDialog: [
                     divScroll,
@@ -102,11 +107,7 @@ function myDialogs() {
         aDiv.className = 'divClassDialog4711';
         aDiv.style.position = 'fixed';
         aDiv.style.transition = ' all 0.2s ease-out';
-        aDiv.innerHTML = [
-            "<div class='dialogDrag4711' title='drag me'>",
-            "<span class='dialogMini4711' style='display:none;'  title='minimiere Dialog'>_</span>&nbsp;",
-            "<span class='dialogClose4711' title='Close Dialog' >X</span></div>",
-            HTML].join('');
+        aDiv.innerHTML = [dragMe, HTML].join('');
         document.body.appendChild(aDiv);
         makeDraggable({dragObj: aDiv, dragHandle: aDiv.querySelector('.dialogDrag4711'), cross: 'no'});
         if (aDiv.id !== 'resultDialog') {
@@ -336,7 +337,7 @@ function myDialogs() {
     // 
     //
     function myPromptSelect(a_text, options, callOnSelect) {
-        var obj = dialogArray['selectDialog'],
+        var obj = dialogArray['selectDialog'], nop,
                 n, i, sel, o0, o1, v, o, d, op;
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
@@ -349,17 +350,9 @@ function myDialogs() {
         n = o0.length;
         for (i = 0; i < n; i++) {
             o1 = o0[i].split('|');
-            v = o = d = '';
-            if (o1.length === 1) {
-                v = o = d = o1[0];
-            } else if (o1.length === 2) {
-                v = o1[0];
-                o = d = o1[1];
-            } else if (o1.length === 3) {
-                v = o1[0];
-                o = o1[1];
-                d = o1[2];
-            }
+            o1.push('');
+            o1.push('');
+            [v, o, d] = o1;
             op = document.createElement("option");
             op.value = v;
             op.text = (o);
@@ -399,7 +392,7 @@ function myDialogs() {
     function makeStyle() {
         var styleElem = document.createElement('STYLE');
         styleElem.innerHTML = [
-            ".divClassDialog4711{background:white; border: 1px solid silver;padding:8px; }",
+            ".divClassDialog4711{box-shadow: 10px 10px 33px 0px rgb(0 0 0 / 75%);background:white; border: 1px solid silver;padding:8px; }",
             ".dialogDrag4711{ background-color:#ececec;text-align:right;display:inline-block;width:100%;border-bottom:1px solid black }",
             ".dialogDrag4711:hover{ cursor:move;background-color:lightgray;}",
             ".dialogClose4711{ font-weight:bold;font-size:1.2em; background-color:white;color:red;padding-left:4px;padding-right:4px;}",
