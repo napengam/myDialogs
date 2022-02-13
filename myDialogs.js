@@ -337,8 +337,8 @@ function myDialogs() {
     // 
     //
     function myPromptSelect(a_text, options, callOnSelect) {
-        var obj = dialogArray['selectDialog'], nop,
-                n, i, sel, o0, o1, v, o, d, op;
+        var obj = dialogArray['selectDialog'], 
+                n, i, sel, o0,  v, o, d, op;
         positionDialog(obj);
         obj.querySelector('.gagaText').innerHTML = a_text.replace(/\n/gi, "<br>");
         sel = obj.querySelector('.gagaSelect');
@@ -349,10 +349,7 @@ function myDialogs() {
         o0 = options.split(',');
         n = o0.length;
         for (i = 0; i < n; i++) {
-            o1 = o0[i].split('|');
-            o1.push('');// have at least 3 items
-            o1.push('');// have at least 3 items
-            [v, o, d] = o1;
+            [v, o, d]  = o0[i].split('|').concat(['', '', '']);//  have at least 3 items;                  
             op = document.createElement("option");
             op.value = v;
             op.text = o === '' ? o = v : o;
