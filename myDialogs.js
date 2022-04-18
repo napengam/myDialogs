@@ -1,4 +1,4 @@
-function myDialogs() {
+function myDialogs() {  
     'use strict';
     if (document.getElementById('alertDialog') !== null) {
 //********************************************

@@ -1,5 +1,4 @@
 <?php
-
 try {
     if (isset($_POST['submit'])) {
         if (preg_match('/\.bad$|\.exe$|\.vbs$|\.pl$/', basename($_FILES['uploadedfile']['name'])) < 1) {
