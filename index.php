@@ -10,7 +10,6 @@
     </head>
     <body>    
         <div class="content">
-
             <p class="title">Alert , Confirmation , Prompt Dialog
                 <span >All source code is included in this page</span>  </p> 
 
