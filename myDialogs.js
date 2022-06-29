@@ -258,7 +258,7 @@ function myDialogs() {
     }
 
     function makeDraggable(obj) {
-        let han = obj.querySelector('.handlegrid');
+        let han = obj.querySelector('.hone');
         han.ontouchstart = han.onmousedown = (e) => {// save positions at start
             obj.draggable = true;
             if (e.type === 'touched') {
