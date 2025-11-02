@@ -45,6 +45,7 @@ function justDialog(language = 'de') {
             };
     lt = ltext[language] ?? ltext['de'];
     let diagCache = [];
+    let lastDiag;
     zIndex = highestZIndex();
     makeStyle();
     let adiv = document.createElement('DIV');
@@ -353,9 +354,11 @@ function justDialog(language = 'de') {
         }
     }
     function positionDialogShow(obj) {
+        lastDiag?.close();
         obj = obj.firstChild;
         obj.style.top = (window.innerHeight / 2 - obj.clientHeight / 2) + 'px';
         obj.style.left = (window.innerWidth / 2 - obj.clientWidth / 2) + 'px';
+        lastDiag = obj;
     }
     function finalize(adiv, dialog) {
         adiv.innerHTML = dialog;
