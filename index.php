@@ -2,10 +2,9 @@
 <html>
     <head>
         <title>Alert and Confirm</title>
-        <meta charset="UTF-8">
-
-
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     </head>
     <body>    
         <div class="content">
@@ -15,21 +14,21 @@
             <p id="out"><b></b></p> 
             <div style="margin-left:20px">
                 <input type=text siye=20>
-                <button  onclick='theDialogs.myInform("<b>The Information Box! Not modal ")'>Just show some information</button>
-                <button  onclick='theDialogs.myLogin("Please Log In")'>Login Dialog</button>
-                <button  onclick='theDialogs.myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
-                <button  onclick='theDialogs.myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
-                <button  onclick='theDialogs.myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
-                <button onclick='theDialogs.myUpload("Upload a file", "dummyUpload.php", () => {
+                <button class='button'  onclick='theDialogs.myInform("<b>The Information Box! Not modal ")'>Just show some information</button>
+                <button class='button'    onclick='theDialogs.myLogin("Please Log In")'>Login Dialog</button>
+                <button class='button'    onclick='theDialogs.myAlert("The Alert box\nYou made it !")'>Show Alert Box</button>
+                <button class='button'    onclick='theDialogs.myConfirm("<h2>Please confirm</h2>", callYes, callNo)'>Show Confirmation Dialog</button>       
+                <button class='button'    onclick='theDialogs.myPrompt("<h2>Please enter</h2>", "666", callOnEnter)'>Show Prompt Dialog</button>       
+                <button class='button'   onclick='theDialogs.myUpload("Upload a file", "dummyUpload.php", () => {
                         }, {path: "f:/upload/"})'>Upload</button>
 
             </div>
             <p> Once a dialog pops up you should no longer be able to press any of the buttons above       
         </div>
-        <script src="justDialogs.js"></script>   
+        <script src="dialogs.js"></script>   
         <script>
-                    theDialogs = myDialogs();
-                    theDialogs = myDialogs(); // test if created only once 
+                    theDialogs = justDialog();
+                    theDialogs = justDialog(); // test if created only once 
 
                     function callYes() {
                         document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';

@@ -1,9 +1,10 @@
 <?php
+
 try {
     if (isset($_POST['submit'])) {
         if (preg_match('/\.bad$|\.exe$|\.vbs$|\.pl$/', basename($_FILES['uploadedfile']['name'])) < 1) {
             // Where the file is going to be placed
-            $path = $_POST['path'];
+            $path = ''; // $_POST['path'];
             $target_path = $path;
             $target_path = $target_path . basename($_FILES['uploadedfile']['name']);
             if (file_exists($target_path)) {
