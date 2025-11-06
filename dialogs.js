@@ -1,10 +1,10 @@
-function justDialog(language = 'de') {
+function dialogsF(language = 'de') {
 
-    if (justDialog._instance) {
+    if (dialogsF._instance) {
         //********************************************
         //  we allready exist
         //*******************************************
-        return justDialog._instance;
+        return dialogsF._instance;
     }
 
     var lt, dialog, beforeCloseHook = null,
@@ -50,7 +50,7 @@ function justDialog(language = 'de') {
     makeStyle();
     let adiv = document.createElement('DIV');
     function makeStyle() {
-        if (document.getElementById('justDialogStyle'))
+        if (document.getElementById('dialogsFStyle'))
         {
             return;
         }
@@ -354,7 +354,9 @@ function justDialog(language = 'de') {
         }
     }
     function positionDialogShow(obj) {
-        lastDiag?.close();
+        if (lastDiag && lastDiag !== obj.firstChild) {
+            lastDiag.close();
+        }
         obj = obj.firstChild;
         obj.style.top = (window.innerHeight / 2 - obj.clientHeight / 2) + 'px';
         obj.style.left = (window.innerWidth / 2 - obj.clientWidth / 2) + 'px';
@@ -365,7 +367,10 @@ function justDialog(language = 'de') {
         document.body.appendChild(adiv);
         makeDraggable(adiv.firstChild, adiv.querySelector('.diagDrag'));
         adiv.querySelector('.delete').addEventListener('click', closeDiag, true);
-        adiv.querySelector('.button')?.addEventListener('click', closeDiag, true);
+        adiv.querySelectorAll('.button').forEach(btn => {
+            btn.removeEventListener('click', closeDiag, true);
+            btn.addEventListener('click', closeDiag, true);
+        });
     }
     function setCloseHook(fn) {
         beforeCloseHook = fn;
@@ -418,8 +423,11 @@ function justDialog(language = 'de') {
         myConfirm: confirm,
         myLogin: login,
         myUpload: upload,
-        myPrompt: prompt
+        myPrompt: prompt,
+        closeDiag: closeDiag,
+        closeDiaglog: closeDiag,
+        close: closeDiag
     };
-    justDialog._instance = reveal;
+    dialogsF._instance = reveal;
     return reveal;
 }

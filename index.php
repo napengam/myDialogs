@@ -27,8 +27,8 @@
         </div>
         <script src="dialogs.js"></script>   
         <script>
-                    theDialogs = justDialog();
-                    theDialogs = justDialog(); // test if created only once 
+                    theDialogs = dialogsF();
+                    theDialogs = dialogsF(); // test if created only once 
 
                     function callYes() {
                         document.getElementById('out').innerHTML = '<b style="color:green">The confirm box YES button was pressed';
