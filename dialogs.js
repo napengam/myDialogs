@@ -297,7 +297,7 @@ function dialogsF(language = 'de') {
         adiv = diagCache[type];
         adiv.querySelector('.message-body').innerHTML = text ? text : '';
         adiv.querySelector('FORM').action = actionUrl;
-        f = adiv.querySelector('FORM');
+        let f = adiv.querySelector('FORM');
         f.idfile.value = '';
         if (hiddenFields !== '') {
             for (let fname in hiddenFields) {
